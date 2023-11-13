@@ -48,7 +48,7 @@ namespace webProject2.Controllers
         public IActionResult login(string name,string password) {
 
             SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
-            string sql = "SELECT * FROM users where name= '" + name + "' , password = '"+password+"'";
+            string sql = "SELECT * FROM users where name= '" + name + "' and password = '"+password+"'";
             SqlCommand comm=new SqlCommand(sql, conn);
             conn.Open();
             SqlDataReader reader = comm.ExecuteReader();

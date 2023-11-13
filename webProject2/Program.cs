@@ -9,6 +9,7 @@ builder.Services.AddDbContext<webProject2Context>(options =>
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+builder.Services.AddSession(options => { options.IdleTimeout = TimeSpan.FromMinutes(1); });
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -24,5 +25,6 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=login}/{id?}");
+app.UseSession();
 
 app.Run();

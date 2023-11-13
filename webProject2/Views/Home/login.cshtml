@@ -10,32 +10,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="../wwwroot/css/style.css" />
+    <link rel="stylesheet" href="..../wwwroot/css/style.css" />
     <style>
-        body {
-            background-image: url(https://images.pexels.com/photos/2908984/pexels-photo-2908984.jpeg?cs=srgb&dl=pexels-stanislav-kondratiev-2908984.jpg&fm=jpg);
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-
-        #loginPage {
-            background-color: rgba(169, 169, 169, 0.644);
-            margin-top: 250px;
-            margin-right: 300px;
-            margin-left: 300px;
-            padding-left: 450px;
-            border-radius: 15px;
-        }
+      
     </style>
 </head>
 <body>
     <div id="loginPage">
         <h1>Login</h1>
-        <form action="home" id="loginForm" method="get">
+        <form asp-action="login" id="loginForm" method="post">
             <div class="form-group">
                 <label>Username</label>
                 <input type="text"
-                       name=""
+                       name="name"
                        class="from-control"
                        id="userName"
                        required
@@ -44,7 +31,7 @@
             <div class="form-group">
                 <label>Password</label>
                 <input type="password"
-                       name=""
+                       name="password"
                        class="from-control"
                        id="password"
                        required />
@@ -52,7 +39,7 @@
 
             <div>Not registerd? <a href="register.html">creaet an acoount</a></div>
             <div class="form-group">
-                <button type="submit" onclick="setTheName()" class="btn btn-success">
+                <button type="submit"  class="btn btn-success">
                     Login
                 </button>
             </div>
