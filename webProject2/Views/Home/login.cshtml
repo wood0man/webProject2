@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log in</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../wwwroot/css/style.css" />
+    <style>
+        body {
+            background-image: url(https://images.pexels.com/photos/2908984/pexels-photo-2908984.jpeg?cs=srgb&dl=pexels-stanislav-kondratiev-2908984.jpg&fm=jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        #loginPage {
+            background-color: rgba(169, 169, 169, 0.644);
+            margin-top: 250px;
+            margin-right: 300px;
+            margin-left: 300px;
+            padding-left: 450px;
+            border-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div id="loginPage">
+        <h1>Login</h1>
+        <form action="home" id="loginForm" method="get">
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text"
+                       name=""
+                       class="from-control"
+                       id="userName"
+                       required
+                       maxlength="12" />
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password"
+                       name=""
+                       class="from-control"
+                       id="password"
+                       required />
+            </div>
+
+            <div>Not registerd? <a href="register.html">creaet an acoount</a></div>
+            <div class="form-group">
+                <button type="submit" onclick="setTheName()" class="btn btn-success">
+                    Login
+                </button>
+            </div>
+            <div class="form-group">
+                Remember me?
+                <input type="checkbox" name="" class="checkbox" id="checkBox" />
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
