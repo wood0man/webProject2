@@ -1,0 +1,149 @@
+body {
+  background-image: url(https://images.pexels.com/photos/2908984/pexels-photo-2908984.jpeg?cs=srgb&dl=pexels-stanislav-kondratiev-2908984.jpg&fm=jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#loginPage {
+  background-color: rgba(169, 169, 169, 0.644);
+  margin-top: 250px;
+  margin-right: 300px;
+  margin-left: 300px;
+  padding-left: 450px;
+  border-radius: 15px;
+}
+
+#register {
+  background-color: rgba(169, 169, 169, 0.654);
+  border: 2px solid;
+  box-shadow: -3px, 3px, 3px, black;
+  margin-right: 200px;
+  margin-left: 200px;
+  border-radius: 20px;
+}
+
+#jumbotron {
+  background-color: rgba(169, 169, 169, 0.644);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  margin-right: 400px;
+  margin-left: 400px;
+  border-radius: 100px;
+}
+#mostSoldBooks {
+  color: white;
+  text-align: center;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  margin-right: 400px;
+  margin-left: 400px;
+}
+
+#ourTeam {
+  background-color: rgba(169, 169, 169, 0.644);
+  text-align: center;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  margin-right: 400px;
+  margin-left: 400px;
+  border-radius: 200px;
+}
+
+.card {
+  color: white;
+  background-color: rgba(169, 169, 169, 0.644);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+#ourServicesLabel {
+  color: white;
+  text-align: center;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  margin-right: 400px;
+  margin-left: 400px;
+
+  margin-top: 80px;
+}
+
+#location {
+  margin-bottom: 50px;
+}
+
+#contactUs {
+  margin-top: 30px;
+  color: white;
+
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+.headerBook {
+  margin-left: 300px;
+  float: left;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  text-align: center;
+}
+
+.totalPriceInfo {
+  margin-top: 250px;
+  margin-left: 700px;
+  font-size: small;
+  float: inline-end;
+  color: white;
+
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  text-align: center;
+  border-radius: 1000px;
+}
+
+#search {
+  text-align: center;
+  background-color: rgba(169, 169, 169, 0.644);
+  margin-top: 200px;
+  margin-right: 400px;
+  margin-left: 400px;
+  left: 300px;
+  border-radius: 200px;
+}
+
+#buy {
+  background-color: rgba(169, 169, 169, 0.644);
+  text-align: center;
+  margin-left: 330px;
+  margin-right: 400px;
+  margin-top: 250px;
+  border-radius: 50px;
+}
+#DescriptionHeader {
+  color: white;
+  text-align: center;
+  margin-top: 400px;
+  font-size: larger;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+#bookDescription {
+  color: white;
+  text-align: center;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  padding-right: 100px;
+  font-size: large;
+}
+
+#blackBackground {
+  bottom: 300px;
+  background-color: rgba(0, 0, 0, 0.325);
+}
+
+#location {
+  height: 350px;
+  border-radius: 100px;
+}
+
+#buyDiv {
+  background-color: rgba(169, 169, 169, 0.64);
+  border-radius: 100px;
+}
+
+#totalPurchase {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+#tableLabel {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: white;
+}
