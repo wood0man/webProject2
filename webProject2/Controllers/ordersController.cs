@@ -159,5 +159,13 @@ namespace webProject2.Controllers
         {
           return (_context.orders?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+
+        public IActionResult invoicelist()
+        {
+            return View();
+        }
+
+
     }
 }

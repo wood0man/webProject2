@@ -71,10 +71,10 @@
                 @Html.DisplayFor(modelItem => Model.quantity)
                 </td>
                 <td>
-                <img src="@Model.image" />
+                <img src="~/images/@Model.image"width="50px" />
                 </td>
                 <td>
-                <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+                <a  asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@Model.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
                 </td>
