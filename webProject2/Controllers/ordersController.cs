@@ -182,7 +182,7 @@ namespace webProject2.Controllers
                 });
 
             }
-
+            ViewData["state"] = "blanching";
             return View(list);
         }
 
@@ -190,10 +190,10 @@ namespace webProject2.Controllers
 
 
         [HttpPost]
-        public IActionResult invoicelist(int idselect) {
+        public IActionResult invoicelist(string order) {
             List<orders> list = new List<orders>();
             SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
-            string sql = "Select * from orders where userid ='" + idselect + "' ";
+            string sql = "Select * from orders where userid ='" + order + "' ";
             SqlCommand comm = new SqlCommand(sql, conn);
             conn.Open();
             SqlDataReader reader = comm.ExecuteReader();
@@ -207,7 +207,7 @@ namespace webProject2.Controllers
                 });
 
             }
-
+            ViewData["state"] = null;
             return View(list);
         }
     } 

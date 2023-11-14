@@ -57,6 +57,10 @@ namespace webProject2.Controllers
             SqlCommand comm=new SqlCommand(sql, conn);
             conn.Open();
             SqlDataReader reader = comm.ExecuteReader();
+            if (reader.Read() == false) {
+                ViewData["wrongLoginInfo"] = "Wrong password or username";
+                return View("login");
+            }
             if(reader.Read())
             {
 
@@ -66,8 +70,7 @@ namespace webProject2.Controllers
                 HttpContext.Session.SetString("userid", id);
                 HttpContext.Session.SetString("name", name);
                 HttpContext.Session.SetString("role", role);
-                reader.Close();
-                conn.Close();
+               
 
 
                 if (role == "customer")
@@ -84,12 +87,13 @@ namespace webProject2.Controllers
 
                 else
                     ViewData["wrongLoginInfo"] = "Wrong password or username";
-                return View();
+                return View("login");
 
             }
 
 
-            
+            reader.Close();
+            conn.Close();
 
             return View();
         

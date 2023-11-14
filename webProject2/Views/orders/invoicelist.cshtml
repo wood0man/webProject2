@@ -16,16 +16,17 @@
     <div class="form-group">
         <label class="control-label">Select customer id</label>
         <select class="form-control" name="cata" id="Id" onchange="getorder()">
-            <option value="nothing">Please select
+            <option value="nothing">
+                Please select
 
 
                 @foreach (orders order in Model)
                 {
-                <option value="@order.userid"> @order.userid  </option>
+                <option value="@order.userid">@order.userid</option>
                 }
 
             </option>
-           
+
         </select>
     </div>
     <div class="form-group">
@@ -36,12 +37,12 @@
 </form>
 <script>
     async function getorder() {
-        var Id = document.getElementById('id').value;
+        var Id = document.getElementById('Id').value;
         var response = await fetch('/APIOrders/' + Id);
         let x = await response.json();
         var dd = "<option> Please select</option>";
         for (i = 0; i < x.length; i++) {
-            dd += "<option>" + x[i].title + "</option>";
+            dd += "<option value ="+x[i].userid+">" + x[i].itemid + "</option>";
         }
         document.getElementById("ti").innerHTML = dd;
     }
@@ -68,7 +69,24 @@
             <th></th>
         </tr>
     </thead>
-    <tbody id="ta" >
+    <tbody id="ta">
 
+        @if (ViewData["state"] == null)
+        {
+            
+            @foreach (orders order in Model)
+            {
+                <tr>
+                    <td>@order.userid</td>
+                    <td>@order.itemid</td>
+                    <td>@order.buyDate</td>
+                    <td>@order.quantity</td>
+                </tr>
+            }
+        
+        
+        
+        }
+        
     </tbody>
 </table>
