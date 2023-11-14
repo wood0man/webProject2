@@ -12,10 +12,26 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="..../wwwroot/css/style.css" />
     <style>
-      
+        body {
+            background-image: url(https://images.pexels.com/photos/2908984/pexels-photo-2908984.jpeg?cs=srgb&dl=pexels-stanislav-kondratiev-2908984.jpg&fm=jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+        }
+
+        #loginPage {
+            margin:auto;
+            
+            background-color: rgba(169, 169, 169, 0.644);
+            
+            border-radius: 15px;
+        }
     </style>
 </head>
 <body>
+    <br />
+    <br />
+    <br />
     <div id="loginPage">
         <h1>Login</h1>
         <form asp-action="login" id="loginForm" method="post">
@@ -49,6 +65,8 @@
             </div>
         </form>
     </div>
+
+    @ViewData["wrongLoginInfo"]
 </body>
 
 </html>

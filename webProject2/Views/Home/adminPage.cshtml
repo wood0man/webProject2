@@ -1,1 +1,74 @@
-﻿
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home page</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../CSS/main.css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <style>
+        body {
+            background-image: url(https://images.pexels.com/photos/2908984/pexels-photo-2908984.jpeg?cs=srgb&dl=pexels-stanislav-kondratiev-2908984.jpg&fm=jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        a img {
+            transition: 0.5s;
+        }
+
+            a img:hover {
+                width: 20%;
+            }
+
+        
+
+        #blackBackground {
+            bottom: 300px;
+            background-color: rgba(0, 0, 0, 0.325);
+        }
+
+       
+    </style>
+    <script>
+        function initMap() {
+            navigator.geolocation.getCurrentPosition(onSuccess);
+            function onSuccess(position) {
+                var location = { lat: position.coords.latitude, lng: position.coords.longitude };
+                var mymap = new google.maps.Map(document.getElementById('location'), { zoom: 8, center: location });
+                var marker = new google.maps.Marker({ position: location, map: mymap });
+            }
+        }
+    </script>
+
+
+</head>
+<body>
+    <div style="bottom: 300px;background-color: rgba(0, 0, 0, 0.325); margin: 50px;" class="blackBackground">
+   
+
+    <!--end of navbar code and start of carousel code-->
+    <div style="text-align:center; color: white; opacity:100%"><h1>Admins page</h1></div>
+
+        <div> <a asp-controller="items" asp-action="index"><img src="https://cdn4.iconfinder.com/data/icons/social-messaging-ui-coloricon-1/21/29-512.png" width="150px" /></a> 
+        <a asp-controller="users" asp-action="index"><img src="https://static.thenounproject.com/png/4035886-200.png" width="150px"/></a>
+            <a asp-action="sendemail"><img src="https://cdn-icons-png.flaticon.com/512/176/176674.png" width="150px" /></a>
+            <a asp-action="itemslist"><img src="https://cdn-icons-png.flaticon.com/512/5230/5230364.png" width="150px" /></a>
+            <a asp-controller="items" asp-action="search"><img src="https://upload.wikimedia.org/wikipedia/commons/3/36/Search_Icon.png" width="150px" /></a>
+            <a asp-action="invoice"><img src="https://static.vecteezy.com/system/resources/previews/019/006/957/original/invoice-flat-icons-png.png" width="150px" /></a>
+        </div>
+        <div><p style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color:white"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;Edit items &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   Add/manage addmins&nbsp;&nbsp;&nbsp;&nbsp;  Send Email   &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                  items list    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                         search       &nbsp;&nbsp;&nbsp;&nbsp;     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        invoice</p></div>
+    </div>
+</body>
+
+
+</html>

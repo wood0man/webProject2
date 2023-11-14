@@ -4,6 +4,13 @@ body {
   background-size: cover;
 }
 
+
+.text{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: white;
+}
+
+
 #loginPage {
   background-color: rgba(169, 169, 169, 0.644);
   margin-top: 250px;

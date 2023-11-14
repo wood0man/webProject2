@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using webProject2.Data;
 using webProject2.Models;
@@ -159,5 +160,38 @@ namespace webProject2.Controllers
         {
           return (_context.items?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+        public IActionResult search() {
+            items item = new items();
+            return View(item);
+        }
+        [HttpPost]
+        public IActionResult search(string title) {
+            SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
+            string sql = "SELECT * FROM items where name like '%" + title + "%'";
+            SqlCommand comm =   new SqlCommand(sql, conn);
+            conn.Open();
+            SqlDataReader reader = comm.ExecuteReader();
+            items items = new items();
+            if (reader.Read())
+            {
+
+                
+                items.name = (string)reader["name"];
+                items.description = (string)reader["description"];
+                items.price = (int)reader["price"];
+                items.category = (string)reader["category"];
+                items.discount = (string)reader["discount"];
+                items.quantity = (int)reader["quantity"];
+                items.image = (string)reader["image"];
+            }
+
+            else { ViewData["Message"] = "No data was found"; }
+
+            conn.Close();
+            reader.Close();
+            return View(items);
+        }
+
     }
 }

@@ -37,7 +37,12 @@ namespace webProject2.Controllers
         }
 
 
-        public IActionResult customerPage() { 
+        public IActionResult customerPage() {
+
+            if (HttpContext.Session.GetString("role") == "admin"){
+                return View("login"); }
+
+
             return View(); 
         }
 
@@ -88,6 +93,32 @@ namespace webProject2.Controllers
 
             return View();
         
+        }
+
+
+        public IActionResult itemslist() {
+
+            SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
+            List<items> list=new List<items>();
+            string sql = "select * from items ";
+            SqlCommand command = new SqlCommand(sql, conn);
+            SqlDataReader reader = command.ExecuteReader();
+            while(reader.Read())
+            {
+                list.Add(new items
+                {
+                    Id = (int)reader["Id"],
+                    name = (string)reader["name"],
+                    description = (string)reader["description"],
+                    price = (int)reader["price"],
+                    quantity = (int)reader["quantity"],
+                    discount = (string)reader["discount"],
+                    category = (string)reader["category"],
+                    image = (string)reader["image"]
+                }) ;
+            }
+            
+            return View(list);
         }
     }
 }

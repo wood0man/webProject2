@@ -1,0 +1,92 @@
+﻿@model IEnumerable<webProject2.Models.items>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our products</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../CSS/main.css" />
+    <style>
+        #blackBackground {
+            bottom: 300px;
+            background-color: rgba(0, 0, 0, 0.325);
+        }
+
+        body {
+            background-image: url(https://images.pexels.com/photos/2908984/pexels-photo-2908984.jpeg?cs=srgb&dl=pexels-stanislav-kondratiev-2908984.jpg&fm=jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        #tableLabel {
+            font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+            color: white;
+        }
+
+        #jumbotron {
+            background-color: rgba(169, 169, 169, 0.644);
+            font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+            margin-right: 400px;
+            margin-left: 400px;
+            border-radius: 100px;
+        }
+    </style>
+</head>
+<body>
+    <!-- navbar-->
+    <nav class="navbar navbar-expand-sm bg-dark top">
+        <ul class="navbar-nav">
+            <!--links to the other pages-->
+            <li class="nav-item">
+                <a href="home" class="nav-link">
+                    <img src="bookStoreLogo.png" alt="logo" width="50px" />
+                </a>
+            </li>
+            <li class="nav-item"><a href="home.html" class="nav-link">Home</a></li>
+            <li class="nav-item">
+                <a href="ourProducts.html" class="nav-link">Our products</a>
+            </li>
+            <li class="nav-item">
+                <a href="buy.html" class="nav-link">Buy</a>
+            </li>
+            <li class="nav-item">
+                <a href="search.html" class="nav-link">Search product</a>
+            </li>
+            <li class="nav-item">
+                <a href="home.html" class="nav-link">MyCart</a>
+            </li>
+            <li class="nav-item">
+                <a href="login.html" class="nav-link">log out</a>
+            </li>
+        </ul>
+    </nav>
+    <div id="blackBackground">
+        <table class="table table-hover" id="ourProducts"></table>
+    </div>
+    <div id="jumbotron">
+        
+
+        <table id="hiddenTable" style="display: none">
+
+            <tr><td>Id</td> <td>Name</td> <td>Description</td><td>Price</td><td>Quantity</td><td>Discount</td><td>Category</td><td>Image</td></tr>
+            @foreach (items item in Model)
+            
+            {
+                
+                <tr><td>@item.Id</td> <td>@item.name</td> <td>@item.</td><td>Price</td><td>@item.quantity</td><td>@item.discount</td><td>@item.category</td><td>@item.image</td></tr>
+
+
+
+            }
+        </table>
+    </div>
+</body>
+
+
+</html>

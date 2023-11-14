@@ -1,8 +1,413 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home page</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/css/" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <style>
+      body {
+  background-image: url(https://images.pexels.com/photos/2908984/pexels-photo-2908984.jpeg?cs=srgb&dl=pexels-stanislav-kondratiev-2908984.jpg&fm=jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+      a img {
+  transition: 2s;
+}
+a img:hover {
+  width: 50%;
+}
+#jumbotron {
+  background-color: rgba(169, 169, 169, 0.644);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  margin-right: 400px;
+  margin-left: 400px;
+  border-radius: 100px;
+}
+#blackBackground {
+  bottom: 300px;
+  background-color: rgba(0, 0, 0, 0.325);
+}
+#ourServicesLabel {
+  color: white;
+  text-align: center;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  margin-right: 400px;
+  margin-left: 400px;
+
+  margin-top: 80px;
+}
+#mostSoldBooks {
+  color: white;
+  text-align: center;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  margin-right: 400px;
+  margin-left: 400px;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+#ourTeam {
+  background-color: rgba(169, 169, 169, 0.644);
+  text-align: center;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  margin-right: 400px;
+  margin-left: 400px;
+  border-radius: 200px;
+}
+
+.card {
+  color: white;
+  background-color: rgba(169, 169, 169, 0.644);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+/* #location {
+  margin-bottom: 50px;
+} */
+    </style>
+    <script>
+      function initMap() {
+        navigator.geolocation.getCurrentPosition(onSuccess);
+        function onSuccess(position) {
+        var location = { lat: position.coords.latitude, lng: position.coords.longitude };
+        var mymap = new google.maps.Map(document.getElementById('location'), { zoom: 8, center: location });
+        var marker = new google.maps.Marker({ position: location, map: mymap });  
+        } 
+      }
+    </script>
+
+
+  </head>
+  <body>
+
+    <!-- navbar-->
+    <nav class="navbar navbar-expand-sm bg-dark top">
+      <ul class="navbar-nav">
+        <!--links to the other pages-->
+        <li class="nav-item">
+          <a href="home" class="nav-link"
+            ><img src="../bookStoreLogo.png" alt="logo" width="50px"
+          /></a>
+        </li>
+        <li class="nav-item"><a href="home.html" class="nav-link">Home</a></li>
+        <li class="nav-item">
+          <a href="ourProducts.html" class="nav-link">Our products</a>
+        </li>
+        <li class="nav-item">
+          <a href="buy.html" class="nav-link">Buy</a>
+        </li>
+        <li class="nav-item">
+          <a href="search.html" class="nav-link">Search product</a>
+        </li>
+        <li class="nav-item">
+          <a href="home.html" class="nav-link">MyCart</a>
+        </li>
+        <li class="nav-item">
+          <a href="login.html" class="nav-link">log out</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!--end of navbar code and start of carousel code-->
+    <div id="crs" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img
+            height="300px"
+            width="100%"
+            src="https://st.depositphotos.com/1081417/3255/i/600/depositphotos_32559365-stock-photo-welcome.jpg"
+            alt="First slide"
+          />
+          <div class="carousel-caption">
+            <!--a name should be loaded here from localstorage-->
+            <h1
+            id="welcomeMessage"
+              class="animate__animated animate__fadeInLeft animate__slow"
+              style="padding-bottom: 20px; color:black;"
+            >
+              welcome 
+            </h1>
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <img
+            height="300px"
+            width="100%"
+            src="https://images.unsplash.com/photo-1519376108558-7b6471e87264?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZGFyayUyMHJvYWR8ZW58MHx8MHx8fDA%3D&w=1000&q=80"
+            alt="First slide"
+          />
+          <div class="carousel-caption">
+            <h1 class="animate__animated animate__fadeInLeft animate__slow">
+              The road
+            </h1>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img
+            height="300px"
+            width="100%"
+            src="https://media.istockphoto.com/id/1188060959/photo/woman-hand-holding-bloody-knife.jpg?b=1&s=170667a&w=0&k=20&c=x_47eD4wVw_yDjGz8SNp6MoXA7ULsRij9q83jQXlC50="
+            alt="First slide"
+          />
+          <div class="carousel-caption">
+            <h1 class="animate__animated animate__fadeInLeft animate__slow">
+              To Kill a Mockingbird
+            </h1>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img
+            height="300px"
+            width="100%"
+            src="https://wallpaperbat.com/img/409998-mars-wallpaper.jpg"
+            alt="third slide"
+          />
+          <div class="carousel-caption">
+            <h1 class="animate__animated animate__fadeInLeft animate__slow">
+              The Martian
+            </h1>
+          </div>
+        </div>
+      </div>
+
+      <a class="carousel-control-prev" href="#crs" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </a>
+
+      <a class="carousel-control-next" href="#crs" data-slide="next">
+        <span class="carousel-control-next-icon"></span
+      ></a>
+    </div>
+    <!--end of carousel code and start of jumbotron-->
+
+    <div id="blackBackground" >
+    <div id="jumbotron" class="jumbotron text-center">
+      <h1>Ziad's bookstore</h1>
+      <br />
+      <p style="opacity: 1">Get ready to explore a world of books</p>
+    </div>
+    <!--linkes to the book's pages-->
+    <div class="container">
+      <h2 id="mostSoldBooks">Our most sold books</h2>
+      <div class="row">
+        <div class="col-md-3">
+          <a href="ToKillAMockingbird.html"
+            ><img
+              src="https://upload.wikimedia.org/wikipedia/commons/4/4f/To_Kill_a_Mockingbird_%28first_edition_cover%29.jpg"
+              width="150px"
+              alt=""
+            />
+          </a>
+        </div>
+        <div class="col-md-3">
+          <a href="theRoad.html"
+            ><img
+              src="https://m.media-amazon.com/images/I/71IJ1HC2a3L._AC_UF1000,1000_QL80_.jpg"
+              width="150px"
+              alt=""
+            />
+          </a>
+        </div>
+        <div class="col-md-3">
+          <a href="1984.html"
+            ><img
+              src="https://cdn.shopify.com/s/files/1/0262/2357/5085/products/9786257287401.jpg?v=1656316483"
+              width="150px"
+              alt=""
+            />
+          </a>
+        </div>
+        <div class="col-md-3">
+          <a href="TheMartian.html"
+            ><img
+              src="https://upload.wikimedia.org/wikipedia/commons/7/71/The_Martian_%28Weir_novel%29.jpg"
+              width="150px"
+              alt=""
+            />
+          </a>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-3">
+          <a href="TheSilentPatient.html"
+            ><img
+              src="https://m.media-amazon.com/images/I/81dkqO5LAQL._AC_UF894,1000_QL80_.jpg"
+              width="150px"
+              alt=""
+            />
+          </a>
+        </div>
+        <div class="col-md-3">
+          <a href="TheAlchemist.html"
+            ><img
+              src="https://www.drstacee.com/wp-content/uploads/2019/03/the-alchemist-cover.png"
+              width="150px"
+              alt=""
+            />
+          </a>
+        </div>
+        <div class="col-md-3">
+          <a href="OneHundredYearsofSolitude.html"
+            ><img
+              src="https://m.media-amazon.com/images/I/91hJ+hgZm4L.jpg"
+              width="150px"
+              alt=""
+            />
+          </a>
+        </div>
+        <div class="col-md-3">
+          <a href="TheAdventuresOfHuckleberryFinn.html"
+            ><img
+              src="https://iamcharlesbakerharris.files.wordpress.com/2021/12/huckleberry-finn.jpg"
+              width="150px"
+              alt="book"
+            />
+          </a>
+        </div>
+      </div>
+
+      <br />
+      <br />
+      <!-- our team section code-->
+      <h2 id="ourTeam">Our team</h2>
+
+      <br />
+
+      <div class="row">
+        <div class="card col-md-4">
+          <div class="card-img-top">
+            <img
+              class="rounded-circle"
+              width="300px"
+              src="https://static.thenounproject.com/png/259872-200.png"
+              alt=""
+            />
+          </div>
+          <div class="card-title text-center">Mohammed ta'oub</div>
+          <div class="card-body text-center">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iste culpa
+            mollitia deleniti consectetur dolorem harum esse delectus! Vel eum
+            culpa impedit delectus neque! Quam rem voluptates doloribus
+            aspernatur facere voluptate.
+          </div>
+        </div>
+
+        <div class="card col-md-4">
+          <div class="card-img-top">
+            <img
+              class="rounded-circle"
+              width="300px"
+              src="https://static.thenounproject.com/png/259872-200.png"
+              alt=""
+            />
+          </div>
+          <div class="card-title text-center">mohammed Otaiby</div>
+          <div class="card-body text-center">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iste culpa
+            mollitia deleniti consectetur dolorem harum esse delectus! Vel eum
+            culpa impedit delectus neque! Quam rem voluptates doloribus
+            aspernatur facere voluptate.
+          </div>
+        </div>
+
+        <div class="card col-md-4">
+          <div class="card-img-top">
+            <img
+              class="rounded-circle"
+              width="300px"
+              src="https://static.thenounproject.com/png/259872-200.png"
+              alt=""
+            />
+          </div>
+          <div class="card-title text-center">Said Shinfary</div>
+          <div class="card-body text-center">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iste culpa
+            mollitia deleniti consectetur dolorem harum esse delectus! Vel eum
+            culpa impedit delectus neque! Quam rem voluptates doloribus
+            aspernatur facere voluptate.
+          </div>
+        </div>
+      </div>
+      <!-- our services code section-->
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h2 id="ourServicesLabel">Our services</h2>
+        </div>
+        <div class="col-md-4">
+          <i
+            class="fa fa-book"
+            style="
+              font-size: 50px;
+              text-align: center;
+              color:white;
+            "
+            >Browse for books</i
+          >
+        </div>
+        <div class="col-md-4">
+          <i
+            class="fa fa-book"
+            style="
+              font-size: 50px;
+              text-align: center;
+              color:white;
+            "
+            >Add them to your cart
+          </i>
+        </div>
+        <div class="col-md-4">
+          <i
+            class="fa fa-book"
+            style="
+              font-size: 50px;
+              text-align: center;
+              color:white;
+            "
+            >Buy them and read them</i
+          >
+        </div>
+      </div>
+      
+      </div>
+    <div class="container-fluid">
+      <div class="row" id="contactUs">
+        <div class="col-md-6">
+          <i class="fa fa-phone" style="font-size: 36px; border-radius: 200px"
+            >Whatsapp: +966 978643157654</i
+          >
+          <br />
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/1384/1384017.png"
+            alt="twitter"
+            width="50px"
+          />
+          ziadBookStore
+        </div>
+        <!-- google map location-->
+        <div class="col-md-6" id="location"></div>
+    </div>
+  </div>
+  <script
+     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDoLVOv6pfvrJ2NX4rezpyO9zxqxXAV5eo&callback=initMap" async> </script>
+
+  </body>
+  
+  <script src="../JavaScript/location.js"></script>
+  <script src="../JavaScript/welcome.js"></script>
+</html>
