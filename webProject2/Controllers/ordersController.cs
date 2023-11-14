@@ -23,9 +23,9 @@ namespace webProject2.Controllers
         // GET: orders
         public async Task<IActionResult> Index()
         {
-              return _context.orders != null ? 
-                          View(await _context.orders.ToListAsync()) :
-                          Problem("Entity set 'webProject2Context.orders'  is null.");
+            return _context.orders != null ?
+                        View(await _context.orders.ToListAsync()) :
+                        Problem("Entity set 'webProject2Context.orders'  is null.");
         }
 
         // GET: orders/Details/5
@@ -151,31 +151,53 @@ namespace webProject2.Controllers
             {
                 _context.orders.Remove(orders);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ordersExists(int id)
         {
-          return (_context.orders?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.orders?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
 
         public IActionResult invoicelist()
         {
-            return View();
+            List<orders> list = new List<orders>();
+            SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
+            string sql = "Select * from orders  ";
+            SqlCommand comm = new SqlCommand(sql, conn);
+            conn.Open();
+            SqlDataReader reader = comm.ExecuteReader();
+            while (reader.Read())
+            {
+                list.Add(new orders
+                {
+                    Id = (int)reader["Id"],
+                    userid = (int)reader["userid"],
+                    itemid = (int)reader["itemid"],
+                    buyDate = (DateTime)reader["buyDate"],
+                    quantity = (int)reader["quantity"]
+                });
+
+            }
+
+            return View(list);
         }
+
+
+
 
         [HttpPost]
         public IActionResult invoicelist(int idselect) {
-            List<orders> list=new List<orders>();
+            List<orders> list = new List<orders>();
             SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
-            string sql = "Select * from orders where userid ='"+idselect+"' ";
-            SqlCommand comm= new SqlCommand(sql, conn);
+            string sql = "Select * from orders where userid ='" + idselect + "' ";
+            SqlCommand comm = new SqlCommand(sql, conn);
             conn.Open();
             SqlDataReader reader = comm.ExecuteReader();
-            while(reader.Read())
+            while (reader.Read())
             {
                 list.Add(new orders { Id = (int)reader["Id"],
                     userid = (int)reader["userid"],
@@ -188,5 +210,6 @@ namespace webProject2.Controllers
 
             return View(list);
         }
-    }
+    } 
 }
+

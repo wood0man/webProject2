@@ -10,17 +10,32 @@
     <a asp-action="Create">Create New</a>
 </p>
 
-<select class="form-control" name="idselect" >
-    <option value="">select a Id</option>
-    @foreach (orders order in Model)
-    {
-        <option value="@order.userid"> @order.userid  </option>
-    }
-</select>
+<form asp-action="invoicelist">
+    <div class="form-group">
+    </div>
+    <div class="form-group">
+        <label class="control-label">Select customer id</label>
+        <select class="form-control" name="cata" id="Id" onchange="getorder()">
+            <option value="nothing">Please select
 
 
+                @foreach (orders order in Model)
+                {
+                <option value="@order.userid"> @order.userid  </option>
+                }
+
+            </option>
+           
+        </select>
+    </div>
+    <div class="form-group">
+        <label class="control-label">Select order</label>
+        <select class="form-control" name="order" id="ti"> </select>
+    </div>
+    <input type="submit" value="Show" class="btn btn-default" />
+</form>
 <script>
-    async function gettitle() {
+    async function getorder() {
         var Id = document.getElementById('id').value;
         var response = await fetch('/APIOrders/' + Id);
         let x = await response.json();
@@ -31,7 +46,6 @@
         document.getElementById("ti").innerHTML = dd;
     }
 </script>
-
 
 
 
@@ -54,27 +68,7 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.userid)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.itemid)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.buyDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.quantity)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+    <tbody id="ta" >
+
     </tbody>
 </table>

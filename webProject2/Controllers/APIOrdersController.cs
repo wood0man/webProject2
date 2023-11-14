@@ -6,7 +6,7 @@ using webProject2.Models;
 
 namespace webProject2.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class APIOrdersController : ControllerBase
 
