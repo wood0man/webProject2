@@ -1,4 +1,4 @@
-﻿@model IEnumerable<webProject2.Models.selectedUserid>
+﻿@model IEnumerable<webProject2.Models.orders>
 
 @{
     ViewData["Title"] = "invoicelist";
@@ -10,11 +10,11 @@
     <a asp-action="Create">Create New</a>
 </p>
 
-<select class="form-control" >
-    <option value="">select a catagory</option>
-    @foreach (selectedUserid userid in Model)
+<select class="form-control" name="idselect" >
+    <option value="">select a Id</option>
+    @foreach (orders order in Model)
     {
-        <option value="@userid.userid"> @userid.userid  </option>
+        <option value="@order.userid"> @order.userid  </option>
     }
 </select>
 

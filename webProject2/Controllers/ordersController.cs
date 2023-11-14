@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using webProject2.Data;
 using webProject2.Models;
@@ -166,6 +167,26 @@ namespace webProject2.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult invoicelist(int idselect) {
+            List<orders> list=new List<orders>();
+            SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
+            string sql = "Select * from orders where userid ='"+idselect+"' ";
+            SqlCommand comm= new SqlCommand(sql, conn);
+            conn.Open();
+            SqlDataReader reader = comm.ExecuteReader();
+            while(reader.Read())
+            {
+                list.Add(new orders { Id = (int)reader["Id"],
+                    userid = (int)reader["userid"],
+                    itemid = (int)reader["itemid"],
+                    buyDate = (DateTime)reader["buyDate"],
+                    quantity = (int)reader["quantity"]
+                });
 
+            }
+
+            return View(list);
+        }
     }
 }
