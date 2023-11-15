@@ -163,34 +163,46 @@ namespace webProject2.Controllers
 
         public IActionResult search() {
             items item = new items();
+
+            ViewData["full"] = "blanching";
             return View(item);
+            
         }
         [HttpPost]
         public IActionResult search(string title) {
+            List<items> list=new List<items>();
             SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
             string sql = "SELECT * FROM items where name like '%" + title + "%'";
             SqlCommand comm =   new SqlCommand(sql, conn);
             conn.Open();
             SqlDataReader reader = comm.ExecuteReader();
             items items = new items();
-            if (reader.Read())
+            while (reader.Read())
             {
 
-                
-                items.name = (string)reader["name"];
-                items.description = (string)reader["description"];
-                items.price = (int)reader["price"];
-                items.category = (string)reader["category"];
-                items.discount = (string)reader["discount"];
-                items.quantity = (int)reader["quantity"];
-                items.image = (string)reader["image"];
-            }
+                list.Add(new items {
 
-            else { ViewData["Message"] = "No data was found"; }
+                    name = (string)reader["name"],
+                description = (string)reader["description"],
+                price = (int)reader["price"],
+                category = (string)reader["category"],
+                discount = (string)reader["discount"],
+                quantity = (int)reader["quantity"],
+                image = (string)reader["image"]
 
+
+
+
+            });
+            
+        }
             conn.Close();
             reader.Close();
-            return View(items);
+            ViewData["full"]=null;
+            return View(list);
+
+
+
         }
 
         

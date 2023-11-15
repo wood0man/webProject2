@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <!-- navbar-->
+    <nav class="navbar navbar-expand-sm bg-dark top">
+        <ul class="navbar-nav">
+            <!--links to the other pages-->
+
+            
+            <li class="nav-item">
+                <a asp-controller="Home" asp-action="login" class="nav-link">log out</a>
+            </li>
+        </ul>
+    </nav>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>

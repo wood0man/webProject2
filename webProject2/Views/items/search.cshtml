@@ -1,4 +1,4 @@
-﻿@model webProject2.Models.items
+﻿@model IEnumerable<webProject2.Models.items>
 
 @{
     ViewData["Title"] = "search";
@@ -49,7 +49,17 @@
     </thead>
     <tbody>
         
+
+
+        @if (ViewData["full"] == null)
         
+       
+
+
+        @foreach(items Model in Model)
+        {
+
+
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => Model.name)
@@ -58,27 +68,30 @@
                     @Html.DisplayFor(modelItem => Model.description)
                 </td>
                 <td>
-                @Html.DisplayFor(modelItem => Model.price)
+                    @Html.DisplayFor(modelItem => Model.price)
                 </td>
                 <td>
-                @Html.DisplayFor(modelItem => Model.discount)
+                    @Html.DisplayFor(modelItem => Model.discount)
                 </td>
-               
+
                 <td>
-                @Html.DisplayFor(modelItem => Model.category)
-                </td>
-                <td>
-                @Html.DisplayFor(modelItem => Model.quantity)
+                    @Html.DisplayFor(modelItem => Model.category)
                 </td>
                 <td>
-                <img src="~/images/@Model.image"width="50px" />
+                    @Html.DisplayFor(modelItem => Model.quantity)
                 </td>
                 <td>
-                <a  asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@Model.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+                    <img src="~/images/@Model.image" width="50px" />
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@Model.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
                 </td>
             </tr>
+
+        }
+       
                 @ViewData["Message"]
     </tbody>
 </table>

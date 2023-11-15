@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using System.Diagnostics;
+using System.Xml.Linq;
 using webProject2.Models;
 
 namespace webProject2.Controllers
@@ -45,7 +46,14 @@ namespace webProject2.Controllers
 
             return View(); 
         }
+        public IActionResult index() {
+            return View();
+        }
 
+        public IActionResult Details()
+        {
+            return View();
+        }
         public IActionResult login() {
             return View();
         }
@@ -146,5 +154,37 @@ namespace webProject2.Controllers
 
         }
 
+
+        public IActionResult mypurchse() {
+
+            return View();
+        }
+        [HttpPost]
+
+        public IActionResult mypurchse(int userid) {
+
+            SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
+
+            string sql = "select userid from userid where Id= '"+HttpContext.Session.GetString("userid")+"'";
+
+            SqlCommand comm = new SqlCommand(sql, conn);
+            conn.Open();
+            
+            orders order = new orders();
+            SqlDataReader reader = comm.ExecuteReader();
+            
+            if (reader.Read())
+            {
+
+                order.itemid = (int)reader["itemid"];
+                order.userid = (int)reader["userid"];
+                order.quantity = (int)reader["quantity"];
+                order.buyDate = (DateTime)reader["buyDate"];
+            }
+            conn.Close();
+
+            return View(order);
+
+        }
     }
 }

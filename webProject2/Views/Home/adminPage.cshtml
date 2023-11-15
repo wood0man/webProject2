@@ -10,45 +10,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../CSS/main.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/style.css" />
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <style>
-        body {
-            background-image: url(https://images.pexels.com/photos/2908984/pexels-photo-2908984.jpeg?cs=srgb&dl=pexels-stanislav-kondratiev-2908984.jpg&fm=jpg);
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-
-        a img {
-            transition: 0.5s;
-        }
-
-            a img:hover {
-                width: 20%;
-            }
-
-        
-
-        #blackBackground {
-            bottom: 300px;
-            background-color: rgba(0, 0, 0, 0.325);
-        }
-
-       
-    </style>
-    <script>
-        function initMap() {
-            navigator.geolocation.getCurrentPosition(onSuccess);
-            function onSuccess(position) {
-                var location = { lat: position.coords.latitude, lng: position.coords.longitude };
-                var mymap = new google.maps.Map(document.getElementById('location'), { zoom: 8, center: location });
-                var marker = new google.maps.Marker({ position: location, map: mymap });
-            }
-        }
-    </script>
+    
+    @{
+        Layout = "~/Views/Shared/adminLayout.cshtml";
+    }
 
 
 </head>

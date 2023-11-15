@@ -1,34 +1,44 @@
-﻿<nav class="navbar navbar-expand-sm bg-dark top">
-    <ul class="navbar-nav">
-        <!--links to the other pages-->
-        <li class="nav-item">
-            <a href="home" class="nav-link">
-                <img src="../bookStoreLogo.png" alt="logo" width="50px" />
-            </a>
-        </li>
-        <li class="nav-item"><a href="home.html" class="nav-link">Home</a></li>
-        <li class="nav-item">
-            <a href="ourProducts.html" class="nav-link">Our products</a>
-        </li>
-        <li class="nav-item">
-            <a href="buy.html" class="nav-link">Buy</a>
-        </li>
-        <li class="nav-item">
-            <a href="search.html" class="nav-link">Search product</a>
-        </li>
-        <li class="nav-item">
-            <a href="home.html" class="nav-link">MyCart</a>
-        </li>
-        <li class="nav-item">
-            <a href="login.html" class="nav-link">log out</a>
-        </li>
-    </ul>
-</nav>
-
-
-
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - webProject2</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/webProject2.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <!-- navbar-->
+        <nav class="navbar navbar-expand-sm bg-dark top">
+            <ul class="navbar-nav">
+                <!--links to the other pages-->
+                
+                <li class="nav-item"><a asp-controller="Home" asp-action="customerPage" class="nav-link">Home</a></li>
+                <li class="nav-item">
+                    <a asp-controller="Home" asp-action="index" class="nav-link">Our products</a>
+                </li>
+                <li class="nav-item">
+                    <a asp-controller="Home" asp-action="buy" class="nav-link">Buy</a>
+                </li>
+                <li class="nav-item">
+                    <a asp-controller="items" asp-action="search" class="nav-link">Search product</a>
+                </li>
+                <li class="nav-item">
+                    <a asp-action="purchases" class="nav-link">myPurchases</a>
+                </li>
+                <li class="nav-item">
+                    <a asp-controller="Home" asp-action="login" class="nav-link">log out</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
             @RenderBody()
-       
+        </main>
+    </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
@@ -39,4 +49,5 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
-
+</body>
+</html>
