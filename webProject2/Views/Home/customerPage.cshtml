@@ -21,64 +21,8 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <style>
-      body {
-  background-image: url(https://images.pexels.com/photos/2908984/pexels-photo-2908984.jpeg?cs=srgb&dl=pexels-stanislav-kondratiev-2908984.jpg&fm=jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-      a img {
-  transition: 2s;
-}
-a img:hover {
-  width: 50%;
-}
-#jumbotron {
-  background-color: rgba(169, 169, 169, 0.644);
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  margin-right: 400px;
-  margin-left: 400px;
-  border-radius: 100px;
-}
-#blackBackground {
-  bottom: 300px;
-  background-color: rgba(0, 0, 0, 0.325);
-}
-#ourServicesLabel {
-  color: white;
-  text-align: center;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  margin-right: 400px;
-  margin-left: 400px;
+   
 
-  margin-top: 80px;
-}
-#mostSoldBooks {
-  color: white;
-  text-align: center;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  margin-right: 400px;
-  margin-left: 400px;
-}
-
-#ourTeam {
-  background-color: rgba(169, 169, 169, 0.644);
-  text-align: center;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  margin-right: 400px;
-  margin-left: 400px;
-  border-radius: 200px;
-}
-
-.card {
-  color: white;
-  background-color: rgba(169, 169, 169, 0.644);
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-}
-/* #location {
-  margin-bottom: 50px;
-} */
-    </style>
     <script>
       function initMap() {
         navigator.geolocation.getCurrentPosition(onSuccess);
@@ -95,32 +39,7 @@ a img:hover {
   <body>
 
     <!-- navbar-->
-    <nav class="navbar navbar-expand-sm bg-dark top">
-      <ul class="navbar-nav">
-        <!--links to the other pages-->
-        <li class="nav-item">
-          <a href="home" class="nav-link"
-            ><img src="../bookStoreLogo.png" alt="logo" width="50px"
-          /></a>
-        </li>
-        <li class="nav-item"><a href="home.html" class="nav-link">Home</a></li>
-        <li class="nav-item">
-          <a href="ourProducts.html" class="nav-link">Our products</a>
-        </li>
-        <li class="nav-item">
-          <a href="buy.html" class="nav-link">Buy</a>
-        </li>
-        <li class="nav-item">
-          <a href="search.html" class="nav-link">Search product</a>
-        </li>
-        <li class="nav-item">
-          <a href="home.html" class="nav-link">MyCart</a>
-        </li>
-        <li class="nav-item">
-          <a href="login.html" class="nav-link">log out</a>
-        </li>
-      </ul>
-    </nav>
+    
 
     <!--end of navbar code and start of carousel code-->
     <div id="crs" class="carousel slide" data-ride="carousel">
@@ -206,36 +125,33 @@ a img:hover {
       <h2 id="mostSoldBooks">Our most sold books</h2>
       <div class="row">
         <div class="col-md-3">
-          <a href="ToKillAMockingbird.html"
-            ><img
-              src="https://upload.wikimedia.org/wikipedia/commons/4/4f/To_Kill_a_Mockingbird_%28first_edition_cover%29.jpg"
+                    <a asp-controller="items" asp-action="Details" asp-route-id="3"><img
+              src="~/images/huckleberry-finn.jpg"
               width="150px"
               alt=""
             />
           </a>
         </div>
         <div class="col-md-3">
-          <a href="theRoad.html"
-            ><img
-              src="https://m.media-amazon.com/images/I/71IJ1HC2a3L._AC_UF1000,1000_QL80_.jpg"
+                    <a asp-controller="items" asp-action="Details" asp-route-id="5"><img
+              src="~/images/71IJ1HC2a3L._AC_UF1000,1000_QL80_.jpg"
               width="150px"
               alt=""
             />
           </a>
         </div>
         <div class="col-md-3">
-          <a href="1984.html"
-            ><img
-              src="https://cdn.shopify.com/s/files/1/0262/2357/5085/products/9786257287401.jpg?v=1656316483"
+                    <a asp-controller="items" asp-action="Details" asp-route-id="1"><img
+              src="~/images/61ibOuXLwcL._AC_UF894,1000_QL80_.jpg"
               width="150px"
               alt=""
             />
           </a>
         </div>
         <div class="col-md-3">
-          <a href="TheMartian.html"
+          <a asp-controller="items" asp-action="Details" asp-route-id="6"
             ><img
-              src="https://upload.wikimedia.org/wikipedia/commons/7/71/The_Martian_%28Weir_novel%29.jpg"
+              src="~/images/TheMartian-850x1236.jpg"
               width="150px"
               alt=""
             />
@@ -243,43 +159,7 @@ a img:hover {
         </div>
       </div>
       <br />
-      <div class="row">
-        <div class="col-md-3">
-          <a href="TheSilentPatient.html"
-            ><img
-              src="https://m.media-amazon.com/images/I/81dkqO5LAQL._AC_UF894,1000_QL80_.jpg"
-              width="150px"
-              alt=""
-            />
-          </a>
-        </div>
-        <div class="col-md-3">
-          <a href="TheAlchemist.html"
-            ><img
-              src="https://www.drstacee.com/wp-content/uploads/2019/03/the-alchemist-cover.png"
-              width="150px"
-              alt=""
-            />
-          </a>
-        </div>
-        <div class="col-md-3">
-          <a href="OneHundredYearsofSolitude.html"
-            ><img
-              src="https://m.media-amazon.com/images/I/91hJ+hgZm4L.jpg"
-              width="150px"
-              alt=""
-            />
-          </a>
-        </div>
-        <div class="col-md-3">
-          <a href="TheAdventuresOfHuckleberryFinn.html"
-            ><img
-              src="https://iamcharlesbakerharris.files.wordpress.com/2021/12/huckleberry-finn.jpg"
-              width="150px"
-              alt="book"
-            />
-          </a>
-        </div>
+      
       </div>
 
       <br />
@@ -317,7 +197,7 @@ a img:hover {
               alt=""
             />
           </div>
-          <div class="card-title text-center">mohammed Otaiby</div>
+          <div class="card-title text-center">Hussam Almuhamady</div>
           <div class="card-body text-center">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iste culpa
             mollitia deleniti consectetur dolorem harum esse delectus! Vel eum

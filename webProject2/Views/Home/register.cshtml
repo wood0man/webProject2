@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign up page</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="~/css/style.css" />
+    <script></script>
+    
+</head>
+<body>
+    <div id="register">
+        <div>
+            <form action="register" id="Form" method="post">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text"
+                           name="name"
+                           class="form-control"
+                           id=""
+                           placeholder=" e.g.: Ziad"
+                           required />
+                </div>
+
+                <div class="form-group">
+                    <label id="firstPasswordLabel">Password</label>
+                    <input type="password"
+                           name="password"
+                           class="form-control"
+                           id="firstPassword"
+                           placeholder="Password"
+                           required />
+                </div>
+
+                <div class="form-group">
+                    <label id="secondPasswordLabel">Confirm password</label>
+                    <input type="password"
+                           name=""
+                           class="form-control"
+                           id="secondPassword"
+                           placeholder="Confirm the password"
+                           required />
+                </div>
+
+                
+
+                
+
+                <div class="form-group">
+                    <label id="terms">Do you agree with our terms</label>
+                    <input type="checkbox"
+                           name=""
+                           class="checkbox"
+                           id="termsCheckbox" />
+                </div>
+                <div class="form-group">
+                    <button type="submit"
+                            onclick="check(event)"
+                            class="btn btn-success">
+                        Sign up
+                    </button>
+
+                    <input type="reset" value="Clear" class="btn btn-danger" />
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<script>
+
+    function check(event) { 
+        if (getElementById(termsCheckbox).value == false) {
+            Terms.style.color = "red";
+            window.alert("You must agree to our terms")
+            e.preventDefault();
+            form.action = "";
+        
+        }
+    
+    
+    }
+</script>
+</html>

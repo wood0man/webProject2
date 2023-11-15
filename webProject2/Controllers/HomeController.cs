@@ -57,10 +57,7 @@ namespace webProject2.Controllers
             SqlCommand comm=new SqlCommand(sql, conn);
             conn.Open();
             SqlDataReader reader = comm.ExecuteReader();
-            if (reader.Read() == false) {
-                ViewData["wrongLoginInfo"] = "Wrong password or username";
-                return View("login");
-            }
+            
             if(reader.Read())
             {
 
@@ -70,7 +67,8 @@ namespace webProject2.Controllers
                 HttpContext.Session.SetString("userid", id);
                 HttpContext.Session.SetString("name", name);
                 HttpContext.Session.SetString("role", role);
-               
+                reader.Close();
+                conn.Close();
 
 
                 if (role == "customer")
@@ -92,8 +90,7 @@ namespace webProject2.Controllers
             }
 
 
-            reader.Close();
-            conn.Close();
+           
 
             return View();
         
@@ -124,5 +121,30 @@ namespace webProject2.Controllers
             
             return View(list);
         }
+
+        public IActionResult register() {
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult register(string name, string password) {
+
+            SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
+
+            string sql = "insert into users (name,password,registerDate,role) values ('"+name+"','"+password+ "',CURRENT_TIMESTAMP,'customer')";
+
+            SqlCommand comm= new SqlCommand(sql, conn);
+            conn.Open();
+            comm.ExecuteNonQuery();
+            conn.Close();
+            return View("login");
+
+
+
+
+
+        }
+
     }
 }
