@@ -55,9 +55,9 @@
                            id="video"
                            width="500px"
                            src="~/images/money_transfer_-_49049 (720p).mp4">
-                       </video>
-                
-                    
+                     </video>
+
+                        
                     
                     <br />
                     <table class="table">
@@ -78,7 +78,7 @@
                                 <th></th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody style="color:white">
                     @foreach(orders order in Model)
                     
                     {
@@ -117,5 +117,8 @@
     </form>
     </div>
 </body>
+<script>
+    window.alert("your total price is "+ @ViewData["amount"])
 
+</script>
 </html>

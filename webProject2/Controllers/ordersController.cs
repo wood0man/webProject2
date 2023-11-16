@@ -301,6 +301,7 @@ namespace webProject2.Controllers
 
 
         public IActionResult checkout() {
+            double amount = 0;
             List<orders>list= new List<orders>();
             SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
             string sql = "SELECT * FROM orders where userid= '"+HttpContext.Session.GetString("userid")+"' ";
@@ -315,7 +316,37 @@ namespace webProject2.Controllers
                     buyDate = (DateTime)reader["buyDate"],
                     quantity = (int)reader["quantity"]
                 });
+
+                
+                 sql = "SELECT * FROM items where Id= '" + reader["itemid"] + "' ";
+                SqlConnection conn2 = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
+
+                SqlCommand comm2 = new SqlCommand(sql, conn2);
+                conn2.Open();
+                SqlDataReader reader2 = comm2.ExecuteReader();
+                if (reader2.Read()) {
+
+                    if ((string)reader2["discount"] == "yes")
+                    {
+                        double pp = (int)reader2["price"];
+                        double discountedprice = pp * 0.1;
+                        amount += (int)reader2["price"] - discountedprice;
+                    }
+
+                    else
+                    {
+                        amount += (int)reader2["price"];
+                            
+                    }
+
+                }
+
+                reader2.Close();
+                conn2.Close();
+
             }
+
+            ViewData["amount"] =amount;
             return View(list);
         }
         [HttpPost]
