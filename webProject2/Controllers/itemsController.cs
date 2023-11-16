@@ -56,17 +56,26 @@ namespace webProject2.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,name,description,price,quantity,discount,category,image")] items items)
+        public async Task<IActionResult> Create(IFormFile image, [Bind("Id,name,description,price,discount,category,quantity")] items item)
         {
-            if (ModelState.IsValid)
             {
-                _context.Add(items);
+                if (image != null)
+                {
+                    string filename = image.FileName;
+                    //  string  ext = Path.GetExtension(file.FileName);
+                    string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images"));
+                    using (var filestream = new FileStream(Path.Combine(path, filename), FileMode.Create))
+                    { await image.CopyToAsync(filestream); }
+
+                    item.image = filename;
+                }
+
+                _context.Add(item);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(items);
         }
+
 
         // GET: items/Edit/5
         public async Task<IActionResult> Edit(int? id)

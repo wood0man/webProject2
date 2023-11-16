@@ -155,13 +155,13 @@ namespace webProject2.Controllers
         }
 
 
-        public IActionResult mypurchse() {
+        public IActionResult mypurchase() {
 
             return View();
         }
         [HttpPost]
 
-        public IActionResult mypurchse(int userid) {
+        public IActionResult mypurchase(int userid) {
 
             SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
 
