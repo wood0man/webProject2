@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using webProject2.Data;
 using webProject2.Models;
 
@@ -298,7 +299,24 @@ namespace webProject2.Controllers
         
         }
 
-        
+
+        public IActionResult checkout() {
+
+            return View();
+        }
+        [HttpPost]
+        public IActionResult checkout(int userid) {
+
+            SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
+            string sql = "DELETE FROM cart where userid = '"+HttpContext.Session.GetString("userid")+"' ";
+            SqlCommand comm = new SqlCommand(sql, conn);
+            conn.Open();
+            comm.ExecuteNonQuery();
+
+            return RedirectToAction("customerPage", "Home");
+
+
+        }
     } 
 }
 

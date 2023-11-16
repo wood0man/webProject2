@@ -1,0 +1,76 @@
+﻿@model webProject2.Models.orders
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Purchase</title>
+    <link rel="stylesheet" href="../CSS/main.css" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        #video {
+           
+            float: left;
+        }
+
+        #buyDiv {
+            margin-top: 300px;
+            float: left;
+            background-color: rgba(169, 169, 169, 0.644);
+            text-align: center;
+            padding: auto;
+        }
+
+        body {
+            background-image: url(https://images.pexels.com/photos/2908984/pexels-photo-2908984.jpeg?cs=srgb&dl=pexels-stanislav-kondratiev-2908984.jpg&fm=jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        #totalPurchase {
+            font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+   
+    <form asp-action="checkout" id="form">
+        <input type="hidden" name="userid"  asp-for="@Model.userid"/>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <video autoplay
+                           muted
+                           id="video"
+                           width="500px"
+                           src="~/images/money_transfer_-_49049 (720p).mp4">
+                       </video>
+                
+                    
+                    <textarea name=""
+                              placeholder="write your suggestions"
+                              id=""
+                              cols="30"
+                              rows="10"></textarea>
+                    <br />
+                    
+                    <button class="btn btn-success" type="submit" >
+                        purchase
+                    </button>
+                
+            </div>
+        </div>
+    </form>
+</body>
+<
+    
+
+    
+    }
+</>
+</html>
