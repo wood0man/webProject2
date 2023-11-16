@@ -46,9 +46,7 @@ namespace webProject2.Controllers
 
             return View(); 
         }
-        public IActionResult index() {
-            return View();
-        }
+       
 
         public IActionResult Details()
         {
@@ -78,7 +76,7 @@ namespace webProject2.Controllers
                 reader.Close();
                 conn.Close();
 
-
+                ViewData["name"]=HttpContext.Session.GetString("name");
                 if (role == "customer")
                 {
 
@@ -156,35 +154,58 @@ namespace webProject2.Controllers
 
 
         public IActionResult mypurchase() {
-
-            return View();
-        }
-        [HttpPost]
-
-        public IActionResult mypurchase(int userid) {
-
             SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
 
-            string sql = "select userid from userid where Id= '"+HttpContext.Session.GetString("userid")+"'";
+            string sql = "select * from orders where userid= (select Id from userid where userid= '" + HttpContext.Session.GetString("userid") + "' ) ";
 
             SqlCommand comm = new SqlCommand(sql, conn);
             conn.Open();
-            
-            orders order = new orders();
-            SqlDataReader reader = comm.ExecuteReader();
-            
-            if (reader.Read())
-            {
 
-                order.itemid = (int)reader["itemid"];
-                order.userid = (int)reader["userid"];
-                order.quantity = (int)reader["quantity"];
-                order.buyDate = (DateTime)reader["buyDate"];
+
+            SqlDataReader reader = comm.ExecuteReader();
+            List<orders> list = new List<orders>();
+            while (reader.Read())
+            {
+                list.Add(new orders
+                {
+
+                    itemid = (int)reader["itemid"],
+                    userid = (int)reader["userid"],
+                    quantity = (int)reader["quantity"],
+                    buyDate = (DateTime)reader["buyDate"]
+
+
+                });
             }
             conn.Close();
 
-            return View(order);
+            return View(list);
+        }
 
+        public IActionResult ourproducts() {
+            SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
+            List<items> list = new List<items>();
+            string sql = "select * from items ";
+            SqlCommand command = new SqlCommand(sql, conn);
+            conn.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                list.Add(new items
+                {
+                    Id = (int)reader["Id"],
+                    name = (string)reader["name"],
+                    description = (string)reader["description"],
+                    price = (int)reader["price"],
+                    quantity = (int)reader["quantity"],
+                    discount = (string)reader["discount"],
+                    category = (string)reader["category"],
+                    image = (string)reader["image"]
+                });
+            }
+            conn.Close();
+            reader.Close();
+            return View(list);
         }
     }
 }

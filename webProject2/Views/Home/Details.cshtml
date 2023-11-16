@@ -1,5 +1,7 @@
 ﻿@model webProject2.Models.items
-
+@{
+    Layout = "~/Views/Shared/customerLayout.cshtml";
+}
 @{
     ViewData["Title"] = "Details";
 }
@@ -56,5 +58,6 @@
 </div>
 <div>
     |
-    <a asp-action="customerPage">Back</a>
+    <a asp-action="customerPage"><button>Back</button></a>
+    <a asp-controller="orders" asp-action="buy"><button>Buy</button></a>
 </div>

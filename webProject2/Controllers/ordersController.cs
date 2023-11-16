@@ -210,6 +210,95 @@ namespace webProject2.Controllers
             ViewData["state"] = null;
             return View(list);
         }
+
+        public IActionResult buy() {
+            SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
+            string sql = "select * from items where quantity>0 ";
+            SqlCommand comm = new SqlCommand(sql, conn);
+            conn.Open();
+            List<items> list = new List<items>();
+            SqlDataReader reader = comm.ExecuteReader();
+            while(reader.Read())
+            {
+
+
+                list.Add(new items
+                {
+                    Id = (int)reader["Id"],
+                    name = (string)reader["name"],
+                    description = (string)reader["description"],
+                    price = (int)reader["price"],
+                    quantity = (int)reader["quantity"],
+                    discount = (string)reader["discount"],
+                    category = (string)reader["category"],
+                    image = (string)reader["image"]
+                });
+
+
+            }
+            return View(list);
+        }
+
+        [HttpPost]
+
+        public IActionResult buy(int itemid,int quantity) {
+            SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
+
+            string name=null;
+            
+            
+            int userid = Convert.ToInt16(HttpContext.Session.GetString("userid"));
+
+
+            string sql = "SELECT * FROM items";
+
+            SqlCommand comm=new SqlCommand(sql, conn);
+            List<items> list = new List<items>();
+            conn.Open();
+            SqlDataReader reader = comm.ExecuteReader();
+            while (reader.Read())
+            {
+                list.Add(new items
+                {
+                    Id = (int)reader["Id"],
+                    name = (string)reader["name"],
+                    description = (string)reader["description"],
+                    price = (int)reader["price"],
+                    quantity = (int)reader["quantity"],
+                    discount = (string)reader["discount"],
+                    category = (string)reader["category"],
+                    image = (string)reader["image"]
+                });
+
+            }
+            reader.Close();
+             sql = "select * from items where Id='"+itemid+"'";
+             comm = new SqlCommand(sql, conn);
+            conn.Close();
+            conn.Open();
+             reader= comm.ExecuteReader();
+            if (reader.Read()) {
+                
+                name= (string)reader["name"];
+                
+
+            
+            }
+            conn.Close();
+            
+            reader.Close();
+            sql = "insert into cart (name,quantity, userid,itemid) values('"+name+"','"+quantity+"','"+userid+"', '"+itemid+"') ";
+                comm = new SqlCommand(sql, conn);
+                conn.Open();
+
+            comm.ExecuteNonQuery();
+            conn.Close();
+            return View(list);
+        
+        
+        }
+
+        
     } 
 }
 

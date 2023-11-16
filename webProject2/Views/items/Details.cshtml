@@ -4,10 +4,11 @@
     ViewData["Title"] = "Details";
 }
 <link rel="stylesheet" type="text/css" href="~/css/style.css" />
-<h1>Details</h1>
 
-<div>
-    <h4>items</h4>
+
+<div id="blackBackground">
+    <h1 style="color:white">Details</h1>
+    <h4 style="color:white">items</h4>
     <hr />
     <dl class="text row">
         <dt class = "col-sm-2">
@@ -53,8 +54,11 @@
             <img src="~/images/@Model.image" width="150px" />
         </dd>
     </dl>
+
+    <div>
+        |
+        <a style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif" asp-action="customerPage"><button>Back</button></a>
+        <a style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif" asp-controller="orders" asp-action="buy"><button>Buy</button></a>
+    </div>
 </div>
-<div>
-    |
-    <a asp-action="customerPage">Back</a>
-</div>
+
