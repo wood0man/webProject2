@@ -301,14 +301,28 @@ namespace webProject2.Controllers
 
 
         public IActionResult checkout() {
-
-            return View();
+            List<orders>list= new List<orders>();
+            SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
+            string sql = "SELECT * FROM orders where userid= '"+HttpContext.Session.GetString("userid")+"' ";
+            SqlCommand comm = new SqlCommand(sql, conn);
+            conn.Open();
+            SqlDataReader reader= comm.ExecuteReader();
+            while (reader.Read())
+            {
+                list.Add(new orders {
+                    userid = (int)reader["userid"],
+                    itemid = (int)reader["itemid"],
+                    buyDate = (DateTime)reader["buyDate"],
+                    quantity = (int)reader["quantity"]
+                });
+            }
+            return View(list);
         }
         [HttpPost]
         public IActionResult checkout(int userid) {
-
+            userid = Convert.ToInt16(HttpContext.Session.GetString("userid"));
             SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
-            string sql = "DELETE FROM cart where userid = '"+HttpContext.Session.GetString("userid")+"' ";
+            string sql = "DELETE FROM cart where userid = '"+userid+"' ";
             SqlCommand comm = new SqlCommand(sql, conn);
             conn.Open();
             comm.ExecuteNonQuery();

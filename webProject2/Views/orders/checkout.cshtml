@@ -1,4 +1,4 @@
-﻿@model webProject2.Models.orders
+﻿@model IEnumerable<webProject2.Models.orders>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Purchase</title>
-    <link rel="stylesheet" href="../CSS/main.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -26,6 +26,8 @@
             padding: auto;
         }
 
+       
+
         body {
             background-image: url(https://images.pexels.com/photos/2908984/pexels-photo-2908984.jpeg?cs=srgb&dl=pexels-stanislav-kondratiev-2908984.jpg&fm=jpg);
             background-repeat: no-repeat;
@@ -35,12 +37,16 @@
         #totalPurchase {
             font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
         }
+        
+        .table{
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+        background-color: white}
     </style>
 </head>
 <body>
-   
+   <div id="centerDic">
     <form asp-action="checkout" id="form">
-        <input type="hidden" name="userid"  asp-for="@Model.userid"/>
+        <input type="hidden" name="userid"  asp-for="@Model.FirstOrDefault().userid"/>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
@@ -52,25 +58,64 @@
                        </video>
                 
                     
-                    <textarea name=""
-                              placeholder="write your suggestions"
-                              id=""
-                              cols="30"
-                              rows="10"></textarea>
-                    <br />
                     
+                    <br />
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.userid)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.itemid)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.buyDate)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.quantity)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                    @foreach(orders order in Model)
+                    
+                    {
+                        
+                        
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => order.userid)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => order.itemid)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => order.buyDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => order.quantity)
+                            </td>
+                            <td>
+                                
+                                <a asp-action="Details" asp-route-id="@order.Id">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@order.Id">Delete</a>
+                            </td>
+                        </tr>
+                    
+                    
+                    }
+                    </tbody></table>
                     <button class="btn btn-success" type="submit" >
                         purchase
                     </button>
                 
             </div>
         </div>
+        </div>
     </form>
+    </div>
 </body>
-<
-    
 
-    
-    }
-</>
 </html>

@@ -1,24 +1,37 @@
 ﻿<!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - webProject2</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/webProject2.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <!-- navbar-->
-    <nav class="navbar navbar-expand-sm bg-dark top">
-        <ul class="navbar-nav">
-            <!--links to the other pages-->
+    <header>
+        <!-- navbar-->
+        <nav class="navbar navbar-expand-sm bg-dark top">
+            <ul class="navbar-nav">
+                <!--links to the other pages-->
 
-            
-            <li class="nav-item">
-                <a asp-controller="Home" asp-action="login" class="nav-link">log out</a>
-            </li>
-        </ul>
-    </nav>
-    <div>
-        @RenderBody()
+                
+                <li class="nav-item">
+                    <a asp-controller="Home" asp-action="login" class="nav-link">log out</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
     </div>
+
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

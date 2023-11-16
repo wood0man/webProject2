@@ -20,7 +20,19 @@
         Layout = "~/Views/Shared/adminLayout.cshtml";
     }
 
+    <style>
+        
 
+        a img {
+            transition: 0.5s;
+        }
+
+            a img:hover {
+                width: 20%;
+            }
+
+        
+    </style>
 </head>
 <body>
     <div style="bottom: 300px;background-color: rgba(0, 0, 0, 0.325); margin: 50px;" class="blackBackground">
@@ -31,7 +43,7 @@
 
         <div> <a asp-controller="items" asp-action="index"><img src="https://cdn4.iconfinder.com/data/icons/social-messaging-ui-coloricon-1/21/29-512.png" width="150px" /></a> 
         <a asp-controller="users" asp-action="index"><img src="https://static.thenounproject.com/png/4035886-200.png" width="150px"/></a>
-            <a asp-action="sendemail"><img src="https://cdn-icons-png.flaticon.com/512/176/176674.png" width="150px" /></a>
+            <a asp-controller="Home" asp-action="email"><img src="https://cdn-icons-png.flaticon.com/512/176/176674.png" width="150px" /></a>
             <a asp-controller="items" asp-action="index"><img src="https://cdn-icons-png.flaticon.com/512/5230/5230364.png" width="150px" /></a>
             <a asp-controller="items" asp-action="search"><img src="https://upload.wikimedia.org/wikipedia/commons/3/36/Search_Icon.png" width="150px" /></a>
             <a asp-controller="orders" asp-action="invoicelist"><img src="https://static.vecteezy.com/system/resources/previews/019/006/957/original/invoice-flat-icons-png.png" width="150px" /></a>

@@ -10,9 +10,9 @@
 <link rel="stylesheet" type="text/css" href="~/css/style.css" />
 <link
 <p>
-   
+
 </p>
-<form asp-action="search">
+<form asp-action="customersearch">
     <div class="form-group">
 
         <input name="title" class="form-control" />
@@ -36,7 +36,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.discount)
             </th>
-            
+
             <th>
                 @Html.DisplayNameFor(model => model.category)
             </th>
@@ -50,50 +50,50 @@
         </tr>
     </thead>
     <tbody>
-        
+
 
 
         @if (ViewData["full"] == null)
-        
-       
 
 
-        @foreach(items Model in Model)
-        {
 
 
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => Model.name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => Model.description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => Model.price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => Model.discount)
-                </td>
+            @foreach (items Model in Model)
+            {
 
-                <td>
-                    @Html.DisplayFor(modelItem => Model.category)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => Model.quantity)
-                </td>
-                <td>
-                    <img src="~/images/@Model.image" width="50px" />
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@Model.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
-                </td>
-            </tr>
 
-        }
-       
-                @ViewData["Message"]
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.discount)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.category)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.quantity)
+                    </td>
+                    <td>
+                        <img src="~/images/@Model.image" width="50px" />
+                    </td>
+                    <td>
+                        |
+                        <a asp-controller="orders" asp-action="buy" ><button>Buy</button></a> |
+                        
+                    </td>
+                </tr>
+
+            }
+
+        @ViewData["Message"]
     </tbody>
 </table>

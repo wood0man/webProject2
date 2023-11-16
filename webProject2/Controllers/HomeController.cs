@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using System.Diagnostics;
+using System.Net.Mail;
 using System.Xml.Linq;
 using webProject2.Models;
 
@@ -207,5 +208,35 @@ namespace webProject2.Controllers
             reader.Close();
             return View(list);
         }
+
+        public IActionResult email()
+        {
+
+            return View();
+        }
+
+
+        [HttpPost, ActionName("email")]
+        [ValidateAntiForgeryToken]
+        public IActionResult email(string address, string subject, string body)
+        {
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+            var mail = new MailMessage();
+            mail.From = new MailAddress("wood03man@gmail.com");
+            mail.To.Add(address); // receiver email address
+            mail.Subject = subject;
+            mail.IsBodyHtml = true;
+            mail.Body = body;
+            SmtpServer.Port = 587;
+            SmtpServer.UseDefaultCredentials = false;
+            SmtpServer.Credentials = new System.Net.NetworkCredential("wood03man@gmail.com","jilcatxqpjhhietk");
+            SmtpServer.EnableSsl = true;
+            SmtpServer.Send(mail);
+            ViewData["Message"] = "Email sent.";
+            return View();
+
+        }
+
+
     }
 }
