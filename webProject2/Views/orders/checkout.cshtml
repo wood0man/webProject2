@@ -1,4 +1,7 @@
-﻿@model IEnumerable<webProject2.Models.orders>
+﻿@model IEnumerable<webProject2.Models.cart>
+@{
+    Layout = "~/Views/Shared/customerLayout.cshtml";
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,7 +47,7 @@
     </style>
 </head>
 <body>
-   <div id="centerDic">
+   <div id="centerDiv">
     <form asp-action="checkout" id="form">
         <input type="hidden" name="userid"  asp-for="@Model.FirstOrDefault().userid"/>
         <div class="container-fluid">
@@ -61,7 +64,7 @@
                     
                     <br />
                     <table class="table">
-                        <thead>
+                        <thead style="color:white;">
                             <tr>
                                 <th>
                                     @Html.DisplayNameFor(model => model.userid)
@@ -70,7 +73,7 @@
                                     @Html.DisplayNameFor(model => model.itemid)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.buyDate)
+                                    @Html.DisplayNameFor(model => model.name)
                                 </th>
                                 <th>
                                     @Html.DisplayNameFor(model => model.quantity)
@@ -79,28 +82,28 @@
                             </tr>
                         </thead>
                         <tbody style="color:white">
-                    @foreach(orders order in Model)
+                    @foreach(cart cart in Model)
                     
                     {
                         
                         
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => order.userid)
+                                @Html.DisplayFor(modelItem => cart.userid)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => order.itemid)
+                                @Html.DisplayFor(modelItem => cart.itemid)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => order.buyDate)
+                                @Html.DisplayFor(modelItem => cart.name)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => order.quantity)
+                                @Html.DisplayFor(modelItem => cart.quantity)
                             </td>
                             <td>
                                 
-                                <a asp-action="Details" asp-route-id="@order.Id">Details</a> |
-                                <a asp-action="Delete" asp-route-id="@order.Id">Delete</a>
+                                <a asp-action="Details" asp-route-id="@cart.Id">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@cart.Id">Delete</a>
                             </td>
                         </tr>
                     

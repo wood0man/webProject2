@@ -245,7 +245,11 @@ namespace webProject2.Controllers
         public IActionResult buy(int itemid,int quantity) {
             SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
 
-            string name=null;
+
+
+            
+
+            string name =null;
             
             
             int userid = Convert.ToInt16(HttpContext.Session.GetString("userid"));
@@ -259,6 +263,11 @@ namespace webProject2.Controllers
             SqlDataReader reader = comm.ExecuteReader();
             while (reader.Read())
             {
+
+                if ((int)reader["quantity"] - quantity <= 0) {
+                    ViewData["buyMessage"] = "Out of stock. sorry";
+                }
+
                 list.Add(new items
                 {
                     Id = (int)reader["Id"],
@@ -282,8 +291,6 @@ namespace webProject2.Controllers
                 
                 name= (string)reader["name"];
                 
-
-            
             }
             conn.Close();
             
@@ -294,6 +301,14 @@ namespace webProject2.Controllers
 
             comm.ExecuteNonQuery();
             conn.Close();
+
+
+            sql = " update items set quantity = quantity - '" + quantity + "' where Id='" + itemid + "'";
+            comm= new SqlCommand(sql, conn);
+            conn.Open();
+            comm.ExecuteNonQuery();
+
+            ViewData["buyMessage"] = "Added to cart";
             return View(list);
         
         
@@ -302,18 +317,18 @@ namespace webProject2.Controllers
 
         public IActionResult checkout() {
             double amount = 0;
-            List<orders>list= new List<orders>();
+            List<cart>list= new List<cart>();
             SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
-            string sql = "SELECT * FROM orders where userid= '"+HttpContext.Session.GetString("userid")+"' ";
+            string sql = "SELECT * FROM cart where userid= '"+HttpContext.Session.GetString("userid")+"' ";
             SqlCommand comm = new SqlCommand(sql, conn);
             conn.Open();
             SqlDataReader reader= comm.ExecuteReader();
             while (reader.Read())
             {
-                list.Add(new orders {
+                list.Add(new cart {
                     userid = (int)reader["userid"],
                     itemid = (int)reader["itemid"],
-                    buyDate = (DateTime)reader["buyDate"],
+                    name = (string)reader["name"],
                     quantity = (int)reader["quantity"]
                 });
 
@@ -332,21 +347,17 @@ namespace webProject2.Controllers
                         double discountedprice = pp * 0.1;
                         amount += (int)reader2["price"] - discountedprice;
                     }
-
                     else
                     {
-                        amount += (int)reader2["price"];
-                            
+                        amount += (int)reader2["price"];     
                     }
-
                 }
-
                 reader2.Close();
                 conn2.Close();
-
             }
-
             ViewData["amount"] =amount;
+
+
             return View(list);
         }
         [HttpPost]
@@ -357,6 +368,10 @@ namespace webProject2.Controllers
             SqlCommand comm = new SqlCommand(sql, conn);
             conn.Open();
             comm.ExecuteNonQuery();
+
+
+
+           
 
             return RedirectToAction("customerPage", "Home");
 

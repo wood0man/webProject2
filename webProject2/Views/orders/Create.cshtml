@@ -8,6 +8,10 @@
 
 <h4>orders</h4>
 <hr />
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#insertModal"> New Item</button
+     @await Html.PartialAsync("insertitem",new items())
+
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">

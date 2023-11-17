@@ -4,17 +4,22 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1 style="color:white">Index</h1>
+@{
+    Layout = "~/Views/Shared/adminLayout.cshtml";
+}
+
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#insertModal"> Create</button>
+    @await Html.PartialAsync("insertitem",new items())
 
 <p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <div class="container-fluid">
     <div class="row">
         @foreach (var item in Model)
         {
             <div class="col-md-3">
-                <div class="card">
+                <div class="card text-dark ">
                     <div class="card-header">
                         @item.name
                     </div>
@@ -22,11 +27,16 @@
                         <img src="~/images/@item.image" height="150" />
                     </div>
                     <div class="card-footer">
-                        @item.description
+                       Quantity: @item.quantity
                     </div>
                     <div class="card-footer">
-                        <a asp-controller="items" asp-action="details" asp-route-id="@item.Id"> Details</a>
-                        <a asp-controller="items" asp-action="Delete" asp-route-id="@item.Id"> Delete</a>
+                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="@("#editModal-" + @item.Id)">edit</button>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="@("#deleteModal-" + @item.Id)">Delete</button>
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="@("#detailModal-" + @item.Id)">Detail</button>
+                            @await Html.PartialAsync("editbook",item)
+                            @await Html.PartialAsync("detailbook",item)
+                            @await Html.PartialAsync("deletebook",item)
+
                     </div>
 
                 </div>

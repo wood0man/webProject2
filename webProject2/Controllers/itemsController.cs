@@ -261,5 +261,11 @@ namespace webProject2.Controllers
 
         }
 
+        public IActionResult customerdetails() {
+
+            return View();
+
+        }
+
     }
 }

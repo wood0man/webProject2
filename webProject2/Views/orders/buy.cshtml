@@ -8,12 +8,13 @@
 @{
     Layout = "~/Views/Shared/customerLayout.cshtml";
 }
+<link rel="stylesheet" type="text/css" href="~/css/style.css" />
 
 
 <p>
     <a asp-controller="orders" asp-action="checkout"><button>Checkout</button></a>
 </p>
-<table class="table">
+<table style="color:white" class="table">
     <thead>
         <tr>
             <th>
@@ -43,11 +44,11 @@
     <tbody>
 @foreach (var item in Model) {
     <form asp-action="buy">
-
+        <td>
+            <input type="hidden" name="itemid" asp-for="@item.Id">
+        </td>
         <tr>
-                 <td>
-                     <input type="hidden" name="itemid" asp-for="@item.Id">
-                </td>
+                
             <td>
                 @Html.DisplayFor(modelItem => item.name)
             </td>
@@ -70,11 +71,18 @@
                 <img src="~/images/@item.image" width="150px">
             </td>
             <td>
-                <button type="submit">Buy</button>
-                <input type="number" name="quantity">
+
+                <button  type="submit">Buy</button>
+                <input onchange="buy()" type="number" name="quantity">
             </td>
         </tr>
             </form>
 }
     </tbody>
 </table>
+
+<script>
+    function buy() {
+    
+    window.alert(@ViewData["buyMessage"])
+</script>
