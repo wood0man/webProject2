@@ -18,7 +18,23 @@
 
                 
                 <li class="nav-item">
+                    <a asp-controller="Home" asp-action="adminPage" class="nav-link">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a asp-controller="items" asp-action="index" class="nav-link">Items list and edit</a>
+                </li>
+
+                <li class="nav-item">
+                    <a asp-controller="Home" asp-action="email" class="nav-link">Send Email</a>
+
+                <li class="nav-item">
+                    <a asp-controller="users" asp-action="index" class="nav-link">manage users</a>
+                </li>
+
+                <li class="nav-item">
                     <a asp-controller="Home" asp-action="login" class="nav-link">log out</a>
+                </li>
                 </li>
             </ul>
         </nav>
