@@ -1,6 +1,32 @@
-﻿<!DOCTYPE html>
+﻿@model IEnumerable<webProject2.Models.categories>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Category');
+            
+            data.addRows([
+                [, @ViewData["d1"]],
+                ['IT', @ViewData["d2"]]
+            ]);
+            var options = {
+                'title': 'Number of Books',
+                'width': 400,
+                'height': 300
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+    </script>
+
+
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -47,8 +73,13 @@
             <a asp-controller="items" asp-action="index"><img src="https://cdn-icons-png.flaticon.com/512/5230/5230364.png" width="150px" /></a>
             <a asp-controller="items" asp-action="search"><img src="https://upload.wikimedia.org/wikipedia/commons/3/36/Search_Icon.png" width="150px" /></a>
             <a asp-controller="orders" asp-action="invoicelist"><img src="https://static.vecteezy.com/system/resources/previews/019/006/957/original/invoice-flat-icons-png.png" width="150px" /></a>
+
         </div>
         <div><p style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color:white"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;Edit items &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   Add/manage addmins&nbsp;&nbsp;&nbsp;&nbsp;  Send Email   &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                  items list    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                         search       &nbsp;&nbsp;&nbsp;&nbsp;     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        invoice</p></div>
+
+        <a style="margin-left:400px" asp-controller="users" asp-action="roleslist"><img src="https://cdn-icons-png.flaticon.com/512/33/33887.png" width="150px" /></a>
+        <div><p style="margin-left:400px;color:white;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Get users by role</p></div>
+    
     </div>
 </body>
 

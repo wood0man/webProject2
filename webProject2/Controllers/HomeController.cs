@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Humanizer;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using System.Diagnostics;
 using System.Net.Mail;
@@ -32,11 +33,26 @@ namespace webProject2.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult adminPage()
+        public async Task<IActionResult> adminPage()
         {
+            List<categories> list = new List<categories>();
 
-            return View();
+            SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
+            string sql = "select distinct(category)from items";
+            SqlCommand comm = new SqlCommand(sql, conn) ;
+            conn.Open();
+            SqlDataReader reader = comm.ExecuteReader();
+            while (reader.Read()) {
+                list.Add(new categories { category = (string)reader["category"] });
+            }
+
+            for (int i = 0; i < list.Count(); i++) {
+                ViewData["Category{}".FormatWith(i)] = list[i];
+            }
+            return View(list);
+            
         }
+
 
 
         public IActionResult customerPage() {
@@ -236,6 +252,8 @@ namespace webProject2.Controllers
             return View();
 
         }
+
+       
 
 
     }

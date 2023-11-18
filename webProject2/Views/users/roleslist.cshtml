@@ -1,0 +1,97 @@
+﻿@model IEnumerable<webProject2.Models.users>
+
+@{
+    ViewData["Title"] = "roleslist";
+}
+<link rel="stylesheet" type="text/css" href="~/css/style.css" />
+<h1>invoicelist</h1>
+@{
+    Layout = "~/Views/Shared/adminLayout.cshtml";
+}
+<style> 
+    body{color:white}
+</style>
+<body>
+    <div id="blackBackground">
+<form asp-action="roleslist">
+    <div class="form-group">
+    </div>
+    <div class="form-group">
+        <label class="control-label">Select role</label>
+        <select class="form-control" name="role" id="role" onchange="getrole()">
+            <option value="nothing">
+                Please select
+
+
+                @foreach (users user in Model)
+                {
+                <option value="@user.role">@user.role</option>
+                }
+
+            </option>
+
+        </select>
+    </div>
+    <div class="form-group">
+        <label class="control-label">Select user</label>
+        <select class="form-control" name="order" id="ti"> </select>
+    </div>
+    <input type="submit"  value="Show" class="btn btn-primary" />
+</form>
+<script>
+    async function getrole() {
+        var role = document.getElementById('role').value;
+        var response = await fetch('/APIUsers/' + role);
+        let x = await response.json();
+        var dd = "<option> Please select</option>";
+        for (i = 0; i < x.length; i++) {
+            dd += "<option value =" + x[i].userid + ">" + x[i].itemid + "</option>";
+        }
+        document.getElementById("ti").innerHTML = dd;
+    }
+</script>
+
+
+
+
+<table id="ti" class="table">
+    <thead>
+        <tr style="color:white">
+                    <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.registerDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.role)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="ta">
+
+        @if (ViewData["state"] == null)
+        {
+
+            @foreach (users user in Model)
+            {
+                <tr style="color:white" >
+                    <td>@user.name</td>
+                    <td>@user.password</td>
+                    <td>@user.registerDate</td>
+                    <td>@user.role</td>
+                </tr>
+            }
+
+
+
+        }
+
+    </tbody>
+    </table>
+    </div>
+</body>

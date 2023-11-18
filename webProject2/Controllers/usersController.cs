@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using webProject2.Data;
 using webProject2.Models;
@@ -159,5 +160,58 @@ namespace webProject2.Controllers
         {
           return (_context.users?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+        public IActionResult roleslist()
+        {
+            List<users> list = new List<users>();
+            SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
+            string sql = "Select * from users  ";
+            SqlCommand comm = new SqlCommand(sql, conn);
+            conn.Open();
+            SqlDataReader reader = comm.ExecuteReader();
+            while (reader.Read())
+            {
+                list.Add(new users
+                {
+                    Id = (int)reader["Id"],
+                    name = (string)reader["name"],
+                    password = (string)reader["password"],
+                    registerDate = (DateTime)reader["registerDate"],
+                    role = (string)reader["role"]
+                });
+
+            }
+            ViewData["state"] = "blanching";
+            return View(list);
+        }
+
+
+
+
+        [HttpPost]
+        public IActionResult roleslist(string role)
+        {
+            List<users> list = new List<users>();
+            SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
+            string sql = "Select * from users where role ='" + role + "' ";
+            SqlCommand comm = new SqlCommand(sql, conn);
+            conn.Open();
+            SqlDataReader reader = comm.ExecuteReader();
+            while (reader.Read())
+            {
+                list.Add(new users
+                {
+                    Id = (int)reader["Id"],
+                    name = (string)reader["name"],
+                    password = (string)reader["password"],
+                    registerDate = (DateTime)reader["registerDate"],
+                    role = (string)reader["role"]
+                });
+
+            }
+            ViewData["state"] = null;
+            return View(list);
+        }
+
     }
 }

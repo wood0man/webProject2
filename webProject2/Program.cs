@@ -27,4 +27,6 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=login}/{id?}");
 app.UseSession();
 
+
+
 app.Run();
