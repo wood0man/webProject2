@@ -167,7 +167,7 @@ namespace webProject2.Controllers
         {
             List<orders> list = new List<orders>();
             SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
-            string sql = "Select * from orders  ";
+            string sql = "Select distinct(userid) from orders  ";
             SqlCommand comm = new SqlCommand(sql, conn);
             conn.Open();
             SqlDataReader reader = comm.ExecuteReader();
@@ -175,11 +175,7 @@ namespace webProject2.Controllers
             {
                 list.Add(new orders
                 {
-                    Id = (int)reader["Id"],
-                    userid = (int)reader["userid"],
-                    itemid = (int)reader["itemid"],
-                    buyDate = (DateTime)reader["buyDate"],
-                    quantity = (int)reader["quantity"]
+                    userid = (int)reader["userid"]
                 });
 
             }
@@ -364,13 +360,30 @@ namespace webProject2.Controllers
         public IActionResult checkout(int userid) {
             userid = Convert.ToInt16(HttpContext.Session.GetString("userid"));
             SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
-            string sql = "DELETE FROM cart where userid = '"+userid+"' ";
+
+            string sql = "SELECT * FROM cart where userid= '" + HttpContext.Session.GetString("userid") + "' ";
             SqlCommand comm = new SqlCommand(sql, conn);
             conn.Open();
+            SqlDataReader reader = comm.ExecuteReader();
+            SqlConnection conn2 = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
+            conn2.Open();
+            while (reader.Read()) {
+                sql = "insert into orders (userid,itemid,buyDate,quantity) values ('"+userid+"' , '" + (int)reader["itemid"] +"', GETDATE() ,'" + (int)reader["quantity"] +"')";
+                comm = new SqlCommand(sql, conn2);
+                comm.ExecuteNonQuery();
+            }
+
+
+            sql = "DELETE FROM cart where userid = '"+userid+"' ";
+            conn.Close();
+            conn.Open();
+             comm = new SqlCommand(sql, conn);
             comm.ExecuteNonQuery();
 
 
+            conn.Close();
 
+            sql = "insert into orders userid ";
            
 
             return RedirectToAction("customerPage", "Home");

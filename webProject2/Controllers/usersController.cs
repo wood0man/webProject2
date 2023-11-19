@@ -163,22 +163,15 @@ namespace webProject2.Controllers
 
         public IActionResult roleslist()
         {
-            List<users> list = new List<users>();
+            List<selectedRole> list = new List<selectedRole>();
             SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
-            string sql = "Select * from users  ";
+            string sql = "Select distinct(role) from users  ";
             SqlCommand comm = new SqlCommand(sql, conn);
             conn.Open();
             SqlDataReader reader = comm.ExecuteReader();
             while (reader.Read())
             {
-                list.Add(new users
-                {
-                    Id = (int)reader["Id"],
-                    name = (string)reader["name"],
-                    password = (string)reader["password"],
-                    registerDate = (DateTime)reader["registerDate"],
-                    role = (string)reader["role"]
-                });
+                list.Add(new selectedRole { role = (string)reader["role"] });
 
             }
             ViewData["state"] = "blanching";
@@ -186,12 +179,10 @@ namespace webProject2.Controllers
         }
 
 
-
-
         [HttpPost]
         public IActionResult roleslist(string role)
         {
-            List<users> list = new List<users>();
+            List<selectedRole> list = new List<selectedRole>();
             SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
             string sql = "Select * from users where role ='" + role + "' ";
             SqlCommand comm = new SqlCommand(sql, conn);
@@ -199,7 +190,7 @@ namespace webProject2.Controllers
             SqlDataReader reader = comm.ExecuteReader();
             while (reader.Read())
             {
-                list.Add(new users
+                list.Add(new selectedRole
                 {
                     Id = (int)reader["Id"],
                     name = (string)reader["name"],
@@ -212,6 +203,8 @@ namespace webProject2.Controllers
             ViewData["state"] = null;
             return View(list);
         }
+
+
 
     }
 }

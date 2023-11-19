@@ -46,9 +46,7 @@ namespace webProject2.Controllers
                 list.Add(new categories { category = (string)reader["category"] });
             }
 
-            for (int i = 0; i < list.Count(); i++) {
-                ViewData["Category{}".FormatWith(i)] = list[i];
-            }
+           
             return View(list);
             
         }

@@ -9,8 +9,11 @@ builder.Services.AddDbContext<webProject2Context>(options =>
 builder.Services.AddControllersWithViews();
 builder.Services.AddSession(options => { options.IdleTimeout = TimeSpan.FromMinutes(1); });
 
-var app = builder.Build();
 
+var app = builder.Build();
+app.UseCors("_myAllowSpecificOrigins");
+app.UseHttpsRedirection();
+app.UseStaticFiles();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -27,6 +30,9 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=login}/{id?}");
 app.UseSession();
 
+app.UseCors("_myAllowSpecificOrigins");
+app.UseHttpsRedirection();
+app.UseStaticFiles();
 
 
 app.Run();

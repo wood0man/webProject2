@@ -1,10 +1,10 @@
-﻿@model IEnumerable<webProject2.Models.users>
+﻿@model IEnumerable<webProject2.Models.selectedRole>
 
 @{
     ViewData["Title"] = "roleslist";
 }
 <link rel="stylesheet" type="text/css" href="~/css/style.css" />
-<h1>invoicelist</h1>
+<h1>users roles</h1>
 @{
     Layout = "~/Views/Shared/adminLayout.cshtml";
 }
@@ -23,7 +23,7 @@
                 Please select
 
 
-                @foreach (users user in Model)
+                @foreach (selectedRole user in Model)
                 {
                 <option value="@user.role">@user.role</option>
                 }
@@ -32,10 +32,7 @@
 
         </select>
     </div>
-    <div class="form-group">
-        <label class="control-label">Select user</label>
-        <select class="form-control" name="order" id="ti"> </select>
-    </div>
+  
     <input type="submit"  value="Show" class="btn btn-primary" />
 </form>
 <script>
@@ -43,11 +40,14 @@
         var role = document.getElementById('role').value;
         var response = await fetch('/APIUsers/' + role);
         let x = await response.json();
-        var dd = "<option> Please select</option>";
+       
+        dd=""
+
         for (i = 0; i < x.length; i++) {
-            dd += "<option value =" + x[i].userid + ">" + x[i].itemid + "</option>";
+
+                    dd += "<tr> <td>" + x.name + "</td> <td>" + x.password + "</td><td>" + x.registerDate + "</td><td>" + x.role + "</td>  </tr>"
         }
-        document.getElementById("ti").innerHTML = dd;
+        document.getElementById("ta").innerHTML = dd;
     }
 </script>
 
@@ -74,22 +74,7 @@
     </thead>
     <tbody id="ta">
 
-        @if (ViewData["state"] == null)
-        {
-
-            @foreach (users user in Model)
-            {
-                <tr style="color:white" >
-                    <td>@user.name</td>
-                    <td>@user.password</td>
-                    <td>@user.registerDate</td>
-                    <td>@user.role</td>
-                </tr>
-            }
-
-
-
-        }
+       
 
     </tbody>
     </table>
