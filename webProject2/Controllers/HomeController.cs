@@ -68,10 +68,21 @@ namespace webProject2.Controllers
             return View();
         }
         public IActionResult login() {
-            return View();
+            if (!HttpContext.Request.Cookies.ContainsKey("name"))
+                return View();
+            else
+            {
+                string name = HttpContext.Request.Cookies["name"].ToString();
+                string password = HttpContext.Request.Cookies["password"].ToString();
+                ViewData["name"] = name;
+                ViewData["password"] = password;
+
+                return View();
+            }
+
         }
         [HttpPost]
-        public IActionResult login(string name,string password) {
+        public IActionResult login(string name,string password, Boolean autologin) {
 
             SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
             string sql = "SELECT * FROM users where name= '" + name + "' and password = '"+password+"'";
@@ -90,8 +101,16 @@ namespace webProject2.Controllers
                 HttpContext.Session.SetString("role", role);
                 reader.Close();
                 conn.Close();
-
+                // dunno why this code is here but I'll leave it lol
                 ViewData["name"]=HttpContext.Session.GetString("name");
+                if (autologin == true)
+                {
+                    var cookieOptions = new CookieOptions
+                    { Expires = DateTime.Now.AddDays(30) };
+                    HttpContext.Response.Cookies.Append("name", name, cookieOptions);
+                    HttpContext.Response.Cookies.Append("password", password, cookieOptions);
+                }
+
                 if (role == "customer")
                 {
 

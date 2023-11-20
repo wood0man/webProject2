@@ -31,12 +31,12 @@
             <div class="carousel-inner">
 
                 <div class="carousel-item active">
-                    <img 
+                    <img style="margin-left: 250px"
                          width="150px%"
                          src="~/images/@Model.First().image"
                          alt=" slide" />
                     <div class="carousel-caption">
-                        <a asp-controller="items" asp-action="Details" asp-route-id="@Model.First().Id">Buy @Model.First().name</a>
+                        <a style="color:white; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif" asp-controller="items" asp-action="Details" asp-route-id="@Model.First().Id">Buy @Model.First().name</a>
 
                     </div>
                 </div>
@@ -54,12 +54,13 @@
             
        
                 <div class="carousel-item">
-                    <img 
+                    <img class="text-center"
+                             style="margin-left: 250px"
                          width="200px%"
                          src="~/images/@item.image"
                          alt=" slide" />
                     <div class="carousel-caption">
-                      <a asp-controller="items" asp-action="Details" asp-route-id="@item.Id">Buy @item.name</a> 
+                      <a style="color:white;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif" asp-controller="items" asp-action="Details" asp-route-id="@item.Id">Buy @item.name</a> 
                         
                     </div>
                 </div>

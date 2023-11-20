@@ -251,7 +251,7 @@ namespace webProject2.Controllers
             int userid = Convert.ToInt16(HttpContext.Session.GetString("userid"));
 
 
-            string sql = "SELECT * FROM items";
+            string sql = "SELECT * FROM items where quantity >0";
 
             SqlCommand comm=new SqlCommand(sql, conn);
             List<items> list = new List<items>();
