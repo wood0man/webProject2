@@ -282,21 +282,24 @@ namespace webProject2.Controllers
             return RedirectToAction("login", "Home");
         }
 
-        public IActionResult dashboard() {
+        public IActionResult dashboard()
+        {
 
             SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
             string sql = "select count(quantity) from items where category= 'Fantasy' ";
             SqlCommand command = new SqlCommand(sql, conn);
             conn.Open();
-            
-            ViewData["c1"]= (int)command.ExecuteScalar();
+
+            ViewData["c1"] = (int)command.ExecuteScalar();
             sql = "select count(quantity) from items where category= 'Mystery' ";
-            command=new SqlCommand(sql, conn);
-            ViewData["c2"]=(int)command.ExecuteScalar();
+            command = new SqlCommand(sql, conn);
+            ViewData["c2"] = (int)command.ExecuteScalar();
             sql = "select count(quantity) from items where category= 'Adventure' ";
             command = new SqlCommand(sql, conn);
             ViewData["c3"] = command.ExecuteScalar();
 
-            return View(); }
-    }
+            return View();
+        }
+    
+}
 }

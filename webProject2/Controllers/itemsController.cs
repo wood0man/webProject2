@@ -261,10 +261,21 @@ namespace webProject2.Controllers
 
         }
 
-        public IActionResult customerdetails() {
+        public async Task<IActionResult> customerdetails(int? id)
+        {
+            if (id == null || _context.items == null)
+            {
+                return NotFound();
+            }
 
-            return View();
+            var items = await _context.items
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (items == null)
+            {
+                return NotFound();
+            }
 
+            return View(items);
         }
 
     }

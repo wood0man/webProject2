@@ -1,10 +1,10 @@
-﻿
+﻿@model IEnumerable<webProject2.Models.categories>
 @{
     ViewData["Title"] = "dashboard";
 }
 
 <h1>dashboard</h1>
-
+<link rel="stylesheet" href="..../wwwroot/css/style.css" />
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
     google.charts.load('current', { 'packages': ['corechart'] });
@@ -15,8 +15,8 @@
         data.addColumn('number', 'Books');
         data.addRows([
             ['Fantasy', @ViewData["c1"]],
-            ['Adventure', @ViewData["c2"]],
-            ['Mystery', @ViewData["c3"]]
+            ['Mystery', @ViewData["c2"]],
+            ['Adventure', @ViewData["c3"]]
         ]);
         var options = {
             'title': 'Number of Books',
@@ -37,24 +37,35 @@
 
         <div class="row">
 
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class='card'>
-                    <div class='card-header bg-warning text-center'>self-improvement</div>
-                    <div class='card-body'><img src='~/images/atomicHabits.jpg' ; width='50px'></div>
+                    <div class='card-header bg-warning text-center'>Fantasy</div>
+                    <div class='card-body'><img src='~/images/TheMartian-850x1236.jpg' ; width='50px'></div>
                     <div class='card-footer'>
                         Number of Books <div> @ViewData["c1"] </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+
+             <div class="col-md-4">
                 <div class='card'>
-                    <div class='card-header bg-warning text-center'>money-management</div>
-                    <div class='card-body'><img src='~/images/rdpd.jpg' ; width='50px'></div>
+                    <div class='card-header bg-warning text-center'>Mystery</div>
+                    <div class='card-body'><img src='~/images/81dkqO5LAQL._AC_UF894,1000_QL80_.jpg' ; width='50px'></div>
                     <div class='card-footer'>
-                        Number of Books <div>@ViewData["c3"] </div>
+                        Number of Books <div> @ViewData["c2"] </div>
                     </div>
                 </div>
             </div>
-        </div>
+
+            <div class="col-md-4">
+                <div class='card'>
+                    <div class='card-header bg-warning text-center'>Adventure</div>
+                    <div class='card-body'><img src='~/images/huckleberry-finn.jpg' ; width='50px'></div>
+                    <div class='card-footer'>
+                        Number of Books <div> @ViewData["c3"] </div>
+                    </div>
+                </div>
+            </div>
+           
     </div>
 </body>
