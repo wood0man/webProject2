@@ -10,11 +10,11 @@ namespace webProject2.Controllers
     public class APIUsersController : ControllerBase
     {
         [HttpGet("{role}")]
-        public IEnumerable<selectedRole> Get(int Id)
+        public IEnumerable<selectedRole> Get(string role)
         {
             List<selectedRole> list = new List<selectedRole>();
             SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
-            string sql = " SELECT * FROM users where Id= '" + Id + "'";
+            string sql = " SELECT * FROM users where role= '" + role + "'";
             SqlCommand comm = new SqlCommand(sql, conn);
             conn.Open();
             SqlDataReader reader = comm.ExecuteReader();

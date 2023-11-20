@@ -35,26 +35,12 @@
   
     <input type="submit"  value="Show" class="btn btn-primary" />
 </form>
-<script>
-    async function getrole() {
-        var role = document.getElementById('role').value;
-        var response = await fetch('/APIUsers/' + role);
-        let x = await response.json();
-       
-        dd=""
-
-        for (var i = 0; i < x.length; i++) {
-
-                    dd += "<tr> <td>" + x[i].name + "</td> <td>" + x[i].password + "</td><td>" + x[i].registerDate + "</td><td>" + x[i].role + "</td>  </tr>"
-        }
-        document.getElementById("ta").innerHTML = dd;
-    }
-</script>
 
 
 
 
-<table id="ti" class="table">
+
+<table id="ti" class="table text-light">
     <thead>
         <tr style="color:white">
                     <th>
@@ -82,4 +68,21 @@
 
 </table>
     </div>
+
+
 </body>
+<script>
+    async function getrole() {
+        var role = document.getElementById('role').value;
+        var response = await fetch('/APIUsers/' + role);
+        let x = await response.json();
+
+        dd = ""
+
+        for (var i = 0; i < x.length; i++) {
+
+            dd += "<tr> <td>" + x[i].name + "</td> <td>" + x[i].password + "</td><td>" + x[i].registerDate + "</td><td>" + x[i].role + "</td>  </tr>"
+        }
+        document.getElementById("ta").innerHTML = dd;
+    }
+</script>

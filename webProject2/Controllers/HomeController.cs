@@ -82,7 +82,7 @@ namespace webProject2.Controllers
 
         }
         [HttpPost]
-        public IActionResult login(string name,string password, Boolean autologin) {
+        public IActionResult login(string name,string password, bool autologin) {
 
             SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
             string sql = "SELECT * FROM users where name= '" + name + "' and password = '"+password+"'";
@@ -103,14 +103,14 @@ namespace webProject2.Controllers
                 conn.Close();
                 // dunno why this code is here but I'll leave it lol
                 ViewData["name"]=HttpContext.Session.GetString("name");
-                if (autologin == true)
+
+                if (autologin)
                 {
                     var cookieOptions = new CookieOptions
                     { Expires = DateTime.Now.AddDays(30) };
                     HttpContext.Response.Cookies.Append("name", name, cookieOptions);
                     HttpContext.Response.Cookies.Append("password", password, cookieOptions);
                 }
-
                 if (role == "customer")
                 {
 
@@ -270,8 +270,17 @@ namespace webProject2.Controllers
 
         }
 
-       
 
+        public IActionResult logout()
+        {
+            HttpContext.Session.Remove("userid");
+            HttpContext.Session.Remove("role");
+            HttpContext.Session.Remove("name");
+            HttpContext.Response.Cookies.Delete("name");
+            HttpContext.Response.Cookies.Delete("role");
+            HttpContext.Response.Cookies.Delete("userid");
+            return RedirectToAction("login", "Home");
+        }
 
     }
 }
