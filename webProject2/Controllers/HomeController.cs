@@ -58,8 +58,28 @@ namespace webProject2.Controllers
             if (HttpContext.Session.GetString("role") == "admin"){
                 return View("login"); }
 
+            SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
+            string sql = "select * from items where";
+            SqlCommand comm=new SqlCommand  (sql, conn) ;
+            conn.Open();
+            List<items>list=new List<items>();
+            SqlDataReader reader = comm.ExecuteReader();
+            while (reader.Read()) {
+                list.Add(new items
+                {
 
-            return View(); 
+                    Id = (int)reader["Id"],
+                    name = (string)reader["name"],
+                    description = (string)reader["description"],
+                    price = (int)reader["price"],
+                    quantity = (int)reader["quantity"],
+                    discount = (string)reader["discount"],
+                    category = (string)reader["category"],
+                    image = (string)reader["image"]
+
+                });
+            }
+            return View(list); 
         }
        
 

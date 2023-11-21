@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿
+
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -127,23 +129,7 @@
       <h2 id="mostSoldBooks">Our most sold books</h2>
       <div class="row">
         <div class="col-md-3">
-                    <a asp-controller="items" asp-action="Details" asp-route-id="3"><img
-              src="~/images/huckleberry-finn.jpg"
-              width="150px"
-              alt=""
-            />
-          </a>
-        </div>
-        <div class="col-md-3">
-                    <a asp-controller="items" asp-action="Details" asp-route-id="5"><img
-              src="~/images/71IJ1HC2a3L._AC_UF1000,1000_QL80_.jpg"
-              width="150px"
-              alt=""
-            />
-          </a>
-        </div>
-        <div class="col-md-3">
-                    <a asp-controller="items" asp-action="Details" asp-route-id="1"><img
+                    <a asp-controller="items" asp-action="customerdetails" asp-route-id="1"><img
               src="~/images/61ibOuXLwcL._AC_UF894,1000_QL80_.jpg"
               width="150px"
               alt=""
@@ -151,9 +137,24 @@
           </a>
         </div>
         <div class="col-md-3">
-          <a asp-controller="items" asp-action="Details" asp-route-id="6"
-            ><img
-              src="~/images/TheMartian-850x1236.jpg"
+                    <a asp-controller="items" asp-action="customerdetails" asp-route-id="4">
+                        <img src="~/images/bookcover.jpg"
+              width="150px"
+              alt=""
+            />
+          </a>
+        </div>
+        <div class="col-md-3">
+                    <a asp-controller="items" asp-action="customerdetails" asp-route-id="5">
+                        <img src="~/images/71IJ1HC2a3L._AC_UF1000,1000_QL80_.jpg"
+              width="150px"
+              alt=""
+            />
+          </a>
+        </div>
+        <div class="col-md-3">
+                    <a asp-controller="items" asp-action="customerdetails" asp-route-id="15"><img
+              src="~/images/81dkqO5LAQL._AC_UF894,1000_QL80_.jpg"
               width="150px"
               alt=""
             />
