@@ -1,8 +1,9 @@
 body {
-  background-image: url(https://images.pexels.com/photos/2908984/pexels-photo-2908984.jpeg?cs=srgb&dl=pexels-stanislav-kondratiev-2908984.jpg&fm=jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
+    background-image: url(https://images.pexels.com/photos/2908984/pexels-photo-2908984.jpeg?cs=srgb&dl=pexels-stanislav-kondratiev-2908984.jpg&fm=jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
+
 
 
 .text{

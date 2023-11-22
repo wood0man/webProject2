@@ -59,7 +59,7 @@ namespace webProject2.Controllers
                 return View("login"); }
 
             SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
-            string sql = "select * from items where";
+            string sql = "select * from items where discount='yes' ";
             SqlCommand comm=new SqlCommand  (sql, conn) ;
             conn.Open();
             List<items>list=new List<items>();
@@ -105,7 +105,7 @@ namespace webProject2.Controllers
         public IActionResult login(string name,string password, bool autologin) {
 
             SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
-            string sql = "SELECT * FROM users where name= '" + name + "' and password = '"+password+"'";
+            string sql = "SELECT * FROM alluser where name= '" + name + "' and password = '"+password+"'";
             SqlCommand comm=new SqlCommand(sql, conn);
             conn.Open();
             SqlDataReader reader = comm.ExecuteReader();
@@ -131,11 +131,11 @@ namespace webProject2.Controllers
                     HttpContext.Response.Cookies.Append("name", name, cookieOptions);
                     HttpContext.Response.Cookies.Append("password", password, cookieOptions);
                 }
-                if (role == "customer")
+                if (role == "customer") 
                 {
 
 
-                    return View("customerPage");
+                    return RedirectToAction("customerPage");
                 }
                 else if (role == "admin")
                 {
@@ -321,5 +321,7 @@ namespace webProject2.Controllers
             return View();
         }
     
+
+        
 }
 }
