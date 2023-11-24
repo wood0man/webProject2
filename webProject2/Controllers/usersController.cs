@@ -57,15 +57,16 @@ namespace webProject2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,name,password,role,registerDate")] users users)
+        public async Task<IActionResult> Create(string name)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(users);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(users);
+            SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
+            string sql = "Update users set role='admin' where name='" + name + "'";
+            SqlCommand comm=new SqlCommand  (sql, conn);
+            conn.Open();
+            comm.ExecuteNonQuery();
+            conn.Close();
+            return View();
+            
         }
 
         // GET: users/Edit/5
