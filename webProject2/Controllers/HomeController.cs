@@ -79,6 +79,7 @@ namespace webProject2.Controllers
 
                 });
             }
+            ViewData["name"] = HttpContext.Session.GetString("name");
             return View(list); 
         }
        
@@ -105,7 +106,7 @@ namespace webProject2.Controllers
         public IActionResult login(string name,string password, bool autologin) {
 
             SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
-            string sql = "SELECT * FROM alluser where name= '" + name + "' and password = '"+password+"'";
+            string sql = "SELECT * FROM users where name= '" + name + "' and password = '"+password+"'";
             SqlCommand comm=new SqlCommand(sql, conn);
             conn.Open();
             SqlDataReader reader = comm.ExecuteReader();
@@ -121,7 +122,7 @@ namespace webProject2.Controllers
                 HttpContext.Session.SetString("role", role);
                 reader.Close();
                 conn.Close();
-                // dunno why this code is here but I'll leave it lol
+                
                 ViewData["name"]=HttpContext.Session.GetString("name");
 
                 if (autologin)
@@ -145,7 +146,7 @@ namespace webProject2.Controllers
 
                 else
                     ViewData["wrongLoginInfo"] = "Wrong password or username";
-                return View("login");
+                return RedirectToAction("login");
 
             }
 
@@ -188,20 +189,35 @@ namespace webProject2.Controllers
         }
 
         [HttpPost]
-        public IActionResult register(string name, string password) {
+        public IActionResult register(string name, string password,string password2) {
 
             SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
 
-            string sql = "insert into users (name,password,registerDate,role) values ('"+name+"','"+password+ "',CURRENT_TIMESTAMP,'customer')";
+            string sql = "SELECT * FROM users where name= '"+name+"'and password= '"+password+"'";
 
             SqlCommand comm= new SqlCommand(sql, conn);
             conn.Open();
-            comm.ExecuteNonQuery();
-            conn.Close();
-            return View("login");
+            SqlDataReader reader = comm.ExecuteReader();
+            if (reader.Read())
+            {
+                ViewData["userDoesExists"] = "Windows.alert(\"The user does already exists. choose another name\")";
+                return View();
+            }
+            else if (password != password2) {
+                ViewData["PassMessage"] = "windows.alert(\"the passwords don't match\")";
+            }
+            else
+            {
+                reader.Close();
+                sql = "insert into users (name,password,registerDate,role) values ('" + name + "','" + password + "',CURRENT_TIMESTAMP,'customer')";
+                comm = new SqlCommand(sql, conn);
+                comm.ExecuteNonQuery();
+                conn.Close();
+                return View("login");
+            }
 
 
-
+            return View();
 
 
         }

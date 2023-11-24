@@ -41,11 +41,13 @@
                 <div class="form-group">
                     <label id="secondPasswordLabel">Confirm password</label>
                     <input type="password"
-                           name=""
+                           name="password2"
                            class="form-control"
                            id="secondPassword"
                            placeholder="Confirm the password"
-                           required />
+                           onchange="checkPass()"
+                           required
+                           />
                 </div>
 
                 
@@ -72,18 +74,27 @@
         </div>
     </div>
 </body>
-<script>
 
-    function check(event) { 
+</html>
+<script>
+    @ViewData["PassMessage"];
+    function check(event) {
         if (getElementById(termsCheckbox).value == false) {
             Terms.style.color = "red";
             window.alert("You must agree to our terms")
             e.preventDefault();
             form.action = "";
-        
+            window.alert(@ViewData["userDoesExists"])
         }
-    
-    
+
+
+    }
+    function checkPass(event) {
+       var pass1=document.getElementById("firstPassword").value
+        var pass2 = document.getElementById("secondPassword").value
+
+        if (pass1 != pass2) {
+            window.alert(@ViewData["passMessage"])
+        }
     }
 </script>
-</html>
