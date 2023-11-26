@@ -8,7 +8,7 @@
 }
 <h1 style="color:white;">search</h1>
 <link rel="stylesheet" type="text/css" href="~/css/style.css" />
-<link
+
 <p>
    
 </p>
@@ -19,7 +19,26 @@
     </div>
     <input type="submit" value="Search" class="text btn btn-default" />
 </form>
-<br /> <p><a asp-action="index">Home</a></p>
+
+
+<br /> 
+
+@{
+    if (ViewData["role"] == "admin")
+    
+    {
+
+        <p><a asp-action="index">Home</a></p>
+
+    }
+    else
+    {
+
+        <p><a asp-controller="Home" asp-action="customerPage">Home</a></p>
+
+    }
+}
+
 <table class=" text table animate__animated animate__fadeInDownBig">
 
     <thead>
@@ -85,11 +104,37 @@
                 <td>
                     <img src="~/images/@Model.image" width="50px" />
                 </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@Model.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
-                </td>
+
+                    @{
+                        if (ViewData["role"] == "admin")
+
+
+                        {
+
+
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@Model.Id">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+                            </td>
+
+                        }
+
+                        else
+                        {
+                            <td>
+                                <a asp-action="Details" asp-route-id="@Model.Id"><button>Details</button></a>
+                                |
+                                <a asp-controller="orders" asp-action="buy"><button>Buy</button></a> 
+
+                            </td>
+
+
+
+                        }
+                    }
+
+                
             </tr>
 
         }

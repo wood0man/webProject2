@@ -57,11 +57,30 @@
         </dd>
     </dl>
 
-    <div>
-        |
-        <a style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif" asp-controller="items" asp-action="Index"><button>Back</button></a>
-        <a style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif" asp-controller="items" asp-action="Edit" asp-route-id="@Model.Id"><button>Edit</button></a>
 
-    </div>
+
+    @{
+        if (ViewData["role"] == "admon")
+        {
+
+            <div>
+                |
+                <a style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif" asp-controller="items" asp-action="Index"><button>Back</button></a>
+                <a style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif" asp-controller="items" asp-action="Edit" asp-route-id="@Model.Id"><button>Edit</button></a>
+
+            </div>
+        
+        }
+
+        else{
+        <div>
+    |
+    <a style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif" asp-controller="Home" asp-action="ourproducts"><button>Back</button></a>
+    <a style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif" asp-controller="orders" asp-action="buy"><button>Buy</button></a>
+
+</div>}
+    }
+
+    
 </div>
 

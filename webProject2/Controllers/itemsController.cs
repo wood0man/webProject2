@@ -31,6 +31,8 @@ namespace webProject2.Controllers
         // GET: items/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+
+            ViewData["role"] = HttpContext.Session.GetString("role");
             if (id == null || _context.items == null)
             {
                 return NotFound();
@@ -190,24 +192,25 @@ namespace webProject2.Controllers
             {
 
                 list.Add(new items {
-
+                    Id = (int)reader["Id"],
                     name = (string)reader["name"],
-                description = (string)reader["description"],
-                price = (int)reader["price"],
-                category = (string)reader["category"],
-                discount = (string)reader["discount"],
-                quantity = (int)reader["quantity"],
-                image = (string)reader["image"]
+                    description = (string)reader["description"],
+                    price = (int)reader["price"],
+                    category = (string)reader["category"],
+                    discount = (string)reader["discount"],
+                    quantity = (int)reader["quantity"],
+                    image = (string)reader["image"]
 
 
 
 
-            });
+                }); 
             
         }
             conn.Close();
             reader.Close();
             ViewData["full"]=null;
+            ViewData["role"] = HttpContext.Session.GetString("role");
             return View(list);
 
 
