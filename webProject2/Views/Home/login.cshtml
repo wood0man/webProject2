@@ -52,12 +52,14 @@
                        class="from-control"
                        id="password"
                        required 
-                       value="@ViewData["password"]"/>
+                       value="@ViewData["password"]"
+                       
+                       />
             </div>
 
             <div>Not registerd? <a asp-action="register">creaet an acoount</a></div>
             <div class="form-group">
-                <button type="submit"  class="btn btn-success">
+                <button  type="submit" class="btn btn-success">
                     Login
                 </button>
             </div>
@@ -67,9 +69,12 @@
             </div>
           
         </form>
+
+       <h1> @ViewData["wrongLoginInfo"]</h1>
+
     </div>
 
-    @ViewData["wrongLoginInfo"]
+    
     
 </body>
 

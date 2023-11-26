@@ -104,7 +104,7 @@ namespace webProject2.Controllers
 
                 return View();
             }
-
+            ViewData = null;   
         }
         [HttpPost]
         public IActionResult login(string name,string password, bool autologin) {
@@ -116,8 +116,8 @@ namespace webProject2.Controllers
             SqlCommand comm=new SqlCommand(sql, conn);
             conn.Open();
             SqlDataReader reader = comm.ExecuteReader();
-            
-            if(reader.Read())
+
+            if (reader.Read())
             {
 
                 string id = Convert.ToString((int)reader["Id"]);
@@ -128,8 +128,8 @@ namespace webProject2.Controllers
                 HttpContext.Session.SetString("role", role);
                 reader.Close();
                 conn.Close();
-                
-                ViewData["name"]=HttpContext.Session.GetString("name");
+
+                ViewData["name"] = HttpContext.Session.GetString("name");
 
                 if (autologin)
                 {
@@ -138,30 +138,29 @@ namespace webProject2.Controllers
                     HttpContext.Response.Cookies.Append("name", name, cookieOptions);
                     HttpContext.Response.Cookies.Append("password", password, cookieOptions);
                 }
-                if (role == "customer") 
+                if (role == "customer")
                 {
 
 
                     return RedirectToAction("customerPage");
                 }
-                else if (role == "admin")
+                else
                 {
-                    conn.Close();
                     return View("adminPage");
                 }
 
 
-                else
-                    ViewData["wrongLoginInfo"] = "Wrong password or username";
-                conn.Close();
-                return RedirectToAction("login");
 
             }
 
 
-
-            conn.Close();
-            return View();
+            else
+            {
+                ViewData["wrongLoginInfo"] = "Wrong password or username";
+                conn.Close();
+                return View();
+            }
+            
         
         }
 
