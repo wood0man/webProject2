@@ -94,17 +94,20 @@ namespace webProject2.Controllers
         }
         public IActionResult login() {
             if (!HttpContext.Request.Cookies.ContainsKey("name"))
+            {
+                ViewData["wrongLoginInfo"] = null;
                 return View();
+            }
             else
             {
                 string name = HttpContext.Request.Cookies["name"].ToString();
                 string password = HttpContext.Request.Cookies["password"].ToString();
                 ViewData["name"] = name;
                 ViewData["password"] = password;
+                ViewData["wrongLoginInfo"] = null;
 
                 return View();
             }
-            ViewData = null;   
         }
         [HttpPost]
         public IActionResult login(string name,string password, bool autologin) {
