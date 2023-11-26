@@ -201,7 +201,7 @@ namespace webProject2.Controllers
         }
 
         [HttpPost]
-        public IActionResult register(string name, string password,string password2) {
+        public IActionResult register(string name, string password,string password2 , bool agree) {
 
             var builder = WebApplication.CreateBuilder();
             string conStr = builder.Configuration.GetConnectionString("webProject2Context");
@@ -217,9 +217,19 @@ namespace webProject2.Controllers
                 return View();
             }
             else if (password != password2) {
-                ViewData["PassMessage"] = "windows.alert(\"the passwords don't match\")";
+                ViewData["wrongPassword"] = "(the passwords don't match)";
             }
-            else
+            
+            else if (agree == false)
+            {
+
+
+                ViewData["doYouAgree"] = "You must agree to our terms";
+                
+
+            }
+            
+            else  
             {
                 reader.Close();
                 sql = "insert into users (name,password,registerDate,role) values ('" + name + "','" + password + "',CURRENT_TIMESTAMP,'customer')";
@@ -228,6 +238,13 @@ namespace webProject2.Controllers
                 conn.Close();
                 return View("login");
             }
+
+
+
+
+
+
+
 
             conn.Close();
             return View();

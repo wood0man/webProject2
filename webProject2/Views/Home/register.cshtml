@@ -57,9 +57,10 @@
                 <div class="form-group">
                     <label id="terms">Do you agree with our terms</label>
                     <input type="checkbox"
-                           name=""
+                           name="agree"
                            class="checkbox"
-                           id="termsCheckbox" />
+                           id="termsCheckbox" 
+                          value="true"/>
                 </div>
                 <div class="form-group">
                     <button type="submit"
@@ -71,30 +72,11 @@
                     <input type="reset" value="Clear" class="btn btn-danger" />
                 </div>
             </form>
+            @ViewData["doYouAgree"]
+            @ViewData["wrongPassword"]
         </div>
     </div>
 </body>
 
 </html>
-<script>
-    @ViewData["PassMessage"];
-    function check(event) {
-        if (getElementById(termsCheckbox).value == false) {
-            Terms.style.color = "red";
-            window.alert("You must agree to our terms")
-            e.preventDefault();
-            form.action = "";
-            window.alert(@ViewData["userDoesExists"])
-        }
 
-
-    }
-    function checkPass(event) {
-       var pass1=document.getElementById("firstPassword").value
-        var pass2 = document.getElementById("secondPassword").value
-
-        if (pass1 != pass2) {
-            window.alert(@ViewData["passMessage"])
-        }
-    }
-</script>
