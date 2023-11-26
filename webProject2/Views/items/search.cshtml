@@ -3,8 +3,15 @@
 @{
     ViewData["Title"] = "search";
 }
+
+
+
 @{
+    if(ViewData["role"]=="admin")
     Layout = "~/Views/Shared/adminLayout.cshtml";
+    else
+        Layout = "~/Views/Shared/customerLayout.cshtml";
+
 }
 <h1 style="color:white;">search</h1>
 <link rel="stylesheet" type="text/css" href="~/css/style.css" />

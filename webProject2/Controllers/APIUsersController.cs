@@ -13,7 +13,9 @@ namespace webProject2.Controllers
         public IEnumerable<selectedRole> Get(string role)
         {
             List<selectedRole> list = new List<selectedRole>();
-            SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
+            var builder = WebApplication.CreateBuilder();
+            string conStr = builder.Configuration.GetConnectionString("webProject2Context");
+            SqlConnection conn = new SqlConnection(conStr);
             string sql = " SELECT * FROM users where role= '" + role + "'";
             SqlCommand comm = new SqlCommand(sql, conn);
             conn.Open();

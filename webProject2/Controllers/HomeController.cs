@@ -56,9 +56,12 @@ namespace webProject2.Controllers
         public IActionResult customerPage() {
 
             if (HttpContext.Session.GetString("role") == "admin"){
-                return View("login"); }
+                return View("login"); 
+            }
 
-            SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
+            var builder = WebApplication.CreateBuilder();
+            string conStr = builder.Configuration.GetConnectionString("webProject2Context");
+            SqlConnection conn = new SqlConnection(conStr);
             string sql = "select * from items where discount='yes' ";
             SqlCommand comm=new SqlCommand  (sql, conn) ;
             conn.Open();
@@ -80,6 +83,7 @@ namespace webProject2.Controllers
                 });
             }
             ViewData["name"] = HttpContext.Session.GetString("name");
+            conn.Close();
             return View(list); 
         }
        
@@ -105,7 +109,9 @@ namespace webProject2.Controllers
         [HttpPost]
         public IActionResult login(string name,string password, bool autologin) {
 
-            SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
+            var builder = WebApplication.CreateBuilder();
+            string conStr = builder.Configuration.GetConnectionString("webProject2Context");
+            SqlConnection conn = new SqlConnection(conStr);
             string sql = "SELECT * FROM users where name= '" + name + "' and password = '"+password+"'";
             SqlCommand comm=new SqlCommand(sql, conn);
             conn.Open();
@@ -140,19 +146,21 @@ namespace webProject2.Controllers
                 }
                 else if (role == "admin")
                 {
+                    conn.Close();
                     return View("adminPage");
                 }
 
 
                 else
                     ViewData["wrongLoginInfo"] = "Wrong password or username";
+                conn.Close();
                 return RedirectToAction("login");
 
             }
 
 
-           
 
+            conn.Close();
             return View();
         
         }
@@ -160,7 +168,9 @@ namespace webProject2.Controllers
 
         public IActionResult itemslist() {
 
-            SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
+            var builder = WebApplication.CreateBuilder();
+            string conStr = builder.Configuration.GetConnectionString("webProject2Context");
+            SqlConnection conn = new SqlConnection(conStr);
             List<items> list=new List<items>();
             string sql = "select * from items ";
             SqlCommand command = new SqlCommand(sql, conn);
@@ -179,7 +189,7 @@ namespace webProject2.Controllers
                     image = (string)reader["image"]
                 }) ;
             }
-            
+            conn.Close();
             return View(list);
         }
 
@@ -191,8 +201,9 @@ namespace webProject2.Controllers
         [HttpPost]
         public IActionResult register(string name, string password,string password2) {
 
-            SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
-
+            var builder = WebApplication.CreateBuilder();
+            string conStr = builder.Configuration.GetConnectionString("webProject2Context");
+            SqlConnection conn = new SqlConnection(conStr);
             string sql = "SELECT * FROM users where name= '"+name+"'and password= '"+password+"'";
 
             SqlCommand comm= new SqlCommand(sql, conn);
@@ -216,7 +227,7 @@ namespace webProject2.Controllers
                 return View("login");
             }
 
-
+            conn.Close();
             return View();
 
 
@@ -224,8 +235,9 @@ namespace webProject2.Controllers
 
 
         public IActionResult mypurchase() {
-            SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
-
+            var builder = WebApplication.CreateBuilder();
+            string conStr = builder.Configuration.GetConnectionString("webProject2Context");
+            SqlConnection conn = new SqlConnection(conStr);
             string sql = "select * from orders where userid= (select Id from userid where userid= '" + HttpContext.Session.GetString("userid") + "' ) ";
 
             SqlCommand comm = new SqlCommand(sql, conn);
@@ -253,7 +265,10 @@ namespace webProject2.Controllers
         }
 
         public IActionResult ourproducts() {
-            SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
+            var builder = WebApplication.CreateBuilder();
+            string conStr = builder.Configuration.GetConnectionString("webProject2Context");
+            SqlConnection conn = new SqlConnection(conStr);
+            
             List<items> list = new List<items>();
             string sql = "select * from items ";
             SqlCommand command = new SqlCommand(sql, conn);
@@ -321,7 +336,9 @@ namespace webProject2.Controllers
         public IActionResult dashboard()
         {
 
-            SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
+            var builder = WebApplication.CreateBuilder();
+            string conStr = builder.Configuration.GetConnectionString("webProject2Context");
+            SqlConnection conn = new SqlConnection(conStr);
             string sql = "select count(quantity) from items where category= 'Fantasy' ";
             SqlCommand command = new SqlCommand(sql, conn);
             conn.Open();
@@ -333,7 +350,7 @@ namespace webProject2.Controllers
             sql = "select count(quantity) from items where category= 'Adventure' ";
             command = new SqlCommand(sql, conn);
             ViewData["c3"] = command.ExecuteScalar();
-
+            conn.Close();
             return View();
         }
     

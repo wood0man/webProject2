@@ -59,14 +59,15 @@ namespace webProject2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(string name)
         {
-            SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
+            var builder = WebApplication.CreateBuilder();
+            string conStr = builder.Configuration.GetConnectionString("webProject2Context");
+            SqlConnection conn = new SqlConnection(conStr);
             string sql = "Update users set role='admin' where name='" + name + "'";
             SqlCommand comm=new SqlCommand  (sql, conn);
             conn.Open();
             comm.ExecuteNonQuery();
             conn.Close();
             return View();
-            
         }
 
         // GET: users/Edit/5
@@ -165,7 +166,9 @@ namespace webProject2.Controllers
         public IActionResult roleslist()
         {
             List<selectedRole> list = new List<selectedRole>();
-            SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
+            var builder = WebApplication.CreateBuilder();
+            string conStr = builder.Configuration.GetConnectionString("webProject2Context");
+            SqlConnection conn = new SqlConnection(conStr);
             string sql = "Select distinct(role) from users  ";
             SqlCommand comm = new SqlCommand(sql, conn);
             conn.Open();
@@ -176,6 +179,7 @@ namespace webProject2.Controllers
 
             }
             ViewData["state"] = "blanching";
+            conn.Close();
             return View(list);
         }
 
@@ -184,7 +188,9 @@ namespace webProject2.Controllers
         public IActionResult roleslist(string role)
         {
             List<selectedRole> list = new List<selectedRole>();
-            SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
+            var builder = WebApplication.CreateBuilder();
+            string conStr = builder.Configuration.GetConnectionString("webProject2Context");
+            SqlConnection conn = new SqlConnection(conStr);
             string sql = "Select * from users where role ='" + role + "' ";
             SqlCommand comm = new SqlCommand(sql, conn);
             conn.Open();
@@ -202,6 +208,7 @@ namespace webProject2.Controllers
 
             }
             ViewData["state"] = null;
+            conn.Close();
             return View(list);
         }
 

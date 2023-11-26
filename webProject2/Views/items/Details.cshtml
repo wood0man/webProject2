@@ -5,8 +5,12 @@
 }
 <link rel="stylesheet" type="text/css" href="~/css/style.css" />
 
-@{
+
+@{if(ViewData["role"]=="admin")
     Layout = "~/Views/Shared/adminLayout.cshtml";
+    else
+        Layout = "~/Views/Shared/customerLayout.cshtml";
+
 }
 <div id="blackBackground">
     <h1 style="color:white">Details</h1>

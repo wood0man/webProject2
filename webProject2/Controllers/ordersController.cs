@@ -166,7 +166,9 @@ namespace webProject2.Controllers
         public IActionResult invoicelist()
         {
             List<orders> list = new List<orders>();
-            SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
+            var builder = WebApplication.CreateBuilder();
+            string conStr = builder.Configuration.GetConnectionString("webProject2Context");
+            SqlConnection conn = new SqlConnection(conStr);
             string sql = "Select distinct(userid) from orders  ";
             SqlCommand comm = new SqlCommand(sql, conn);
             conn.Open();
@@ -180,6 +182,7 @@ namespace webProject2.Controllers
 
             }
             ViewData["state"] = "blanching";
+            conn.Close();
             return View(list);
         }
 
@@ -189,7 +192,9 @@ namespace webProject2.Controllers
         [HttpPost]
         public IActionResult invoicelist(string order) {
             List<orders> list = new List<orders>();
-            SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
+            var builder = WebApplication.CreateBuilder();
+            string conStr = builder.Configuration.GetConnectionString("webProject2Context");
+            SqlConnection conn = new SqlConnection(conStr);
             string sql = "Select * from orders where userid ='" + order + "' ";
             SqlCommand comm = new SqlCommand(sql, conn);
             conn.Open();
@@ -205,11 +210,14 @@ namespace webProject2.Controllers
 
             }
             ViewData["state"] = null;
+            conn.Close();
             return View(list);
         }
 
         public IActionResult buy() {
-            SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
+            var builder = WebApplication.CreateBuilder();
+            string conStr = builder.Configuration.GetConnectionString("webProject2Context");
+            SqlConnection conn = new SqlConnection(conStr);
             string sql = "select * from items where quantity>0 ";
             SqlCommand comm = new SqlCommand(sql, conn);
             conn.Open();
@@ -233,23 +241,19 @@ namespace webProject2.Controllers
 
 
             }
+            conn.Close();
             return View(list);
         }
 
         [HttpPost]
 
         public IActionResult buy(int itemid,int quantity) {
-            SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
-
-
-
-            
+            var builder = WebApplication.CreateBuilder();
+            string conStr = builder.Configuration.GetConnectionString("webProject2Context");
+            SqlConnection conn = new SqlConnection(conStr);
 
             string name =null;
-            
-            
             int userid = Convert.ToInt16(HttpContext.Session.GetString("userid"));
-
 
             string sql = "SELECT * FROM items where quantity >0";
 
@@ -305,6 +309,7 @@ namespace webProject2.Controllers
             comm.ExecuteNonQuery();
 
             ViewData["buyMessage"] = "Added to cart";
+            conn.Close();
             return View(list);
         
         
@@ -314,7 +319,9 @@ namespace webProject2.Controllers
         public IActionResult checkout() {
             double amount = 0;
             List<cart>list= new List<cart>();
-            SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
+            var builder = WebApplication.CreateBuilder();
+            string conStr = builder.Configuration.GetConnectionString("webProject2Context");
+            SqlConnection conn = new SqlConnection(conStr);
             string sql = "SELECT * FROM cart where userid= '"+HttpContext.Session.GetString("userid")+"' ";
             SqlCommand comm = new SqlCommand(sql, conn);
             conn.Open();
@@ -353,19 +360,23 @@ namespace webProject2.Controllers
             }
             ViewData["amount"] =amount;
 
-
+            conn.Close();
             return View(list);
         }
         [HttpPost]
         public IActionResult checkout(int userid) {
             userid = Convert.ToInt16(HttpContext.Session.GetString("userid"));
-            SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
+            var builder = WebApplication.CreateBuilder();
+            string conStr = builder.Configuration.GetConnectionString("webProject2Context");
+            SqlConnection conn = new SqlConnection(conStr);
 
             string sql = "SELECT * FROM cart where userid= '" + HttpContext.Session.GetString("userid") + "' ";
             SqlCommand comm = new SqlCommand(sql, conn);
             conn.Open();
             SqlDataReader reader = comm.ExecuteReader();
-            SqlConnection conn2 = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
+            var builder2 = WebApplication.CreateBuilder();
+            string conStr2 = builder.Configuration.GetConnectionString("webProject2Context");
+            SqlConnection conn2 = new SqlConnection(conStr);
             conn2.Open();
             while (reader.Read()) {
                 sql = "insert into orders (userid,itemid,buyDate,quantity) values ('"+userid+"' , '" + (int)reader["itemid"] +"', GETDATE() ,'" + (int)reader["quantity"] +"')";
@@ -380,10 +391,9 @@ namespace webProject2.Controllers
              comm = new SqlCommand(sql, conn);
             comm.ExecuteNonQuery();
 
-
+            conn2.Close();
             conn.Close();
 
-            sql = "insert into orders userid ";
            
 
             return RedirectToAction("customerPage", "Home");
