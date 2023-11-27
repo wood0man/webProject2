@@ -57,6 +57,7 @@ namespace webProject2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        // Add admin
         public async Task<IActionResult> Create(string name)
         {
             var builder = WebApplication.CreateBuilder();
@@ -162,7 +163,7 @@ namespace webProject2.Controllers
         {
           return (_context.users?.Any(e => e.Id == id)).GetValueOrDefault();
         }
-
+        //User search and it has an API controller
         public IActionResult roleslist()
         {
             List<selectedRole> list = new List<selectedRole>();

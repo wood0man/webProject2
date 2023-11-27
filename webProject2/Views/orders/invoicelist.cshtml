@@ -68,22 +68,29 @@
             <th>
                 @Html.DisplayNameFor(model => model.quantity)
             </th>
-            <th></th>
+            <th>
+                Total
+
+            </th>
         </tr>
     </thead>
     <tbody id="ta">
 
         @if (ViewData["state"] == null)
         {
-            
-            @foreach (orders order in Model)
+                int i = 0;
+                @foreach (orders order in Model)
             {
                 <tr>
                     <td>@order.userid</td>
                     <td>@order.itemid</td>
                     <td>@order.buyDate</td>
                     <td>@order.quantity</td>
-                </tr>
+                        <td>@ViewData["sum"]</td>
+
+
+
+                    </tr>
             }
         
         

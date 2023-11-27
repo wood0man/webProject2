@@ -35,19 +35,7 @@ namespace webProject2.Controllers
 
         public async Task<IActionResult> adminPage()
         {
-            List<categories> list = new List<categories>();
-
-            SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
-            string sql = "select distinct(category)from items";
-            SqlCommand comm = new SqlCommand(sql, conn) ;
-            conn.Open();
-            SqlDataReader reader = comm.ExecuteReader();
-            while (reader.Read()) {
-                list.Add(new categories { category = (string)reader["category"] });
-            }
-
-           
-            return View(list);
+            return View ();
             
         }
 
@@ -167,7 +155,7 @@ namespace webProject2.Controllers
         
         }
 
-
+        //not used
         public IActionResult itemslist() {
 
             var builder = WebApplication.CreateBuilder();
@@ -176,6 +164,7 @@ namespace webProject2.Controllers
             List<items> list=new List<items>();
             string sql = "select * from items ";
             SqlCommand command = new SqlCommand(sql, conn);
+            conn.Open();
             SqlDataReader reader = command.ExecuteReader();
             while(reader.Read())
             {
@@ -199,7 +188,7 @@ namespace webProject2.Controllers
 
             return View();
         }
-
+        //Acts as the create action for userscontroller
         [HttpPost]
         public IActionResult register(string name, string password,string password2 , bool agree) {
 
@@ -282,7 +271,7 @@ namespace webProject2.Controllers
 
             return View(list);
         }
-
+        //image slider page
         public IActionResult ourproducts() {
             var builder = WebApplication.CreateBuilder();
             string conStr = builder.Configuration.GetConnectionString("webProject2Context");

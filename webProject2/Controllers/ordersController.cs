@@ -187,8 +187,8 @@ namespace webProject2.Controllers
         }
 
 
-
-
+        //Step 12
+        //acts as the order details
         [HttpPost]
         public IActionResult invoicelist(string order) {
             List<orders> list = new List<orders>();
@@ -209,6 +209,11 @@ namespace webProject2.Controllers
                 });
 
             }
+
+            sql = "SELECT sum(Quantity) from orders where userid='" + order + "'";
+            reader.Close();
+            comm=new SqlCommand(sql, conn);
+            ViewData["sum"] = comm.ExecuteScalar();
             ViewData["state"] = null;
             conn.Close();
             return View(list);
