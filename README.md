@@ -1,7 +1,7 @@
 # webProject2
 
 
-this is a book store program.
+this is a bookstore program.
 you can either be an admin or a customer
 
 here are the tables you need to use the project
@@ -38,18 +38,9 @@ CREATE TABLE [dbo].[orders] (
     CONSTRAINT [FK_orders_items] FOREIGN KEY ([itemid]) REFERENCES [dbo].[items] ([Id])
 );
 
-CREATE TABLE [dbo].[roles] (
-    [Id]     INT          IDENTITY (1, 1) NOT NULL,
-    [FKRole] VARCHAR (50) NULL,
-    PRIMARY KEY CLUSTERED ([Id] ASC)
-);
 
-CREATE TABLE [dbo].[userid] (
-    [Id]     INT IDENTITY (1, 1) NOT NULL,
-    [userid] INT NULL,
-    PRIMARY KEY CLUSTERED ([Id] ASC),
-    CONSTRAINT [FK_userid_users] FOREIGN KEY ([userid]) REFERENCES [dbo].[users] ([Id])
-);
+
+
 
 
 
