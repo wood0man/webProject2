@@ -4,9 +4,9 @@
     ViewData["Title"] = "buy";
 }
 
-<h1>buy</h1>
+<h1 style="color:white">buy</h1>
 @{
-    Layout = "~/Views/Shared/customerLayout.cshtml";
+    Layout = "~/Views/Shared/customerLayout2.cshtml";
 }
 <link rel="stylesheet" type="text/css" href="~/css/style.css" />
 
@@ -14,6 +14,8 @@
 <p>
     <a asp-controller="orders" asp-action="checkout"><button>Checkout</button></a>
 </p>
+<h3 style="color:red;">@ViewData["falseBuyMessage"]</h3>
+<h3 style="color:green">@ViewData["successBuyMessage"]</h3>
 <table style="color:white" class="table">
     <thead>
         <tr>
@@ -73,7 +75,7 @@
             <td>
 
                 <button  type="submit">Buy</button>
-                <input onchange="buy()" type="number" name="quantity">
+                <input  type="number" name="quantity">
             </td>
         </tr>
             </form>
@@ -81,8 +83,3 @@
     </tbody>
 </table>
 
-<script>
-    function buy() {
-    
-    window.alert(@ViewData["buyMessage"])
-</script>

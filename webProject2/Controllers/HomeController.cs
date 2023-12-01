@@ -247,7 +247,7 @@ namespace webProject2.Controllers
             string conStr = builder.Configuration.GetConnectionString("webProject2Context");
             SqlConnection conn = new SqlConnection(conStr);
             string sql = "select * from orders where userid= (select Id from userid where userid= '" + HttpContext.Session.GetString("userid") + "' ) ";
-
+            // Here i useing an inner query to get the Id without using a forign key
             SqlCommand comm = new SqlCommand(sql, conn);
             conn.Open();
 

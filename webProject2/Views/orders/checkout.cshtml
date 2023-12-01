@@ -102,8 +102,8 @@
                             </td>
                             <td>
                                 
-                                <a asp-action="Details" asp-route-id="@cart.Id">Details</a> |
-                                <a asp-action="Delete" asp-route-id="@cart.Id">Delete</a>
+                                <a asp-controller="items" asp-action="Details" asp-route-id="@cart.itemid">Details</a> |
+                                <a asp-action="deleteFromCart" asp-route-id="@cart.Id">Delete</a>
                             </td>
                         </tr>
                     

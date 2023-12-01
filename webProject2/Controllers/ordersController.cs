@@ -260,18 +260,16 @@ namespace webProject2.Controllers
             string name =null;
             int userid = Convert.ToInt16(HttpContext.Session.GetString("userid"));
 
-            string sql = "SELECT * FROM items where quantity >0";
+            string sql = "SELECT * FROM items where Id='"+itemid+"'";
 
             SqlCommand comm=new SqlCommand(sql, conn);
             List<items> list = new List<items>();
             conn.Open();
             SqlDataReader reader = comm.ExecuteReader();
-            while (reader.Read())
+            if (reader.Read())
             {
 
-                if ((int)reader["quantity"] - quantity <= 0) {
-                    ViewData["buyMessage"] = "Out of stock. sorry";
-                }
+                int quantity1 = (int)reader["quantity"];
 
                 list.Add(new items
                 {
@@ -279,13 +277,38 @@ namespace webProject2.Controllers
                     name = (string)reader["name"],
                     description = (string)reader["description"],
                     price = (int)reader["price"],
-                    quantity = (int)reader["quantity"],
+                    quantity = quantity1,
                     discount = (string)reader["discount"],
                     category = (string)reader["category"],
                     image = (string)reader["image"]
                 });
+               if (quantity1 - quantity <= 0)
+            {
+                ViewData["falseBuyMessage"] = "Out of stock. sorry";
 
+                    sql = "SELECT * FROM items WHERE quantity >0 and Id NOT IN ('"+itemid+"')";
+                    comm=new SqlCommand(sql, conn);
+                    reader.Close();
+                    reader = comm.ExecuteReader();
+                    while (reader.Read()) {
+                        list.Add(new items
+                        {
+                            Id = (int)reader["Id"],
+                            name = (string)reader["name"],
+                            description = (string)reader["description"],
+                            price = (int)reader["price"],
+                            quantity = quantity1,
+                            discount = (string)reader["discount"],
+                            category = (string)reader["category"],
+                            image = (string)reader["image"]
+                        });
+
+                    }
+                    
+                    return View(list);
+            } 
             }
+            
             reader.Close();
              sql = "select * from items where Id='"+itemid+"'";
              comm = new SqlCommand(sql, conn);
@@ -300,6 +323,28 @@ namespace webProject2.Controllers
             conn.Close();
             
             reader.Close();
+
+            sql = "SELECT * FROM items WHERE Id NOT IN ('"+itemid+"')";
+            comm= new SqlCommand(sql, conn);
+            conn.Open();
+            reader= comm.ExecuteReader();
+
+            while(reader.Read()) {
+                list.Add(new items
+                {
+                    Id = (int)reader["Id"],
+                    name = (string)reader["name"],
+                    description = (string)reader["description"],
+                    price = (int)reader["price"],
+                    quantity = (int)reader["quantity"],
+                    discount = (string)reader["discount"],
+                    category = (string)reader["category"],
+                    image = (string)reader["image"]
+                });
+            }
+            conn.Close();
+            reader.Close();
+
             sql = "insert into cart (name,quantity, userid,itemid) values('"+name+"','"+quantity+"','"+userid+"', '"+itemid+"') ";
                 comm = new SqlCommand(sql, conn);
                 conn.Open();
@@ -313,7 +358,7 @@ namespace webProject2.Controllers
             conn.Open();
             comm.ExecuteNonQuery();
 
-            ViewData["buyMessage"] = "Added to cart";
+            ViewData["successBuyMessage"] = "Added to cart";
             conn.Close();
             return View(list);
         
@@ -334,6 +379,7 @@ namespace webProject2.Controllers
             while (reader.Read())
             {
                 list.Add(new cart {
+                    Id = (int)reader["Id"],
                     userid = (int)reader["userid"],
                     itemid = (int)reader["itemid"],
                     name = (string)reader["name"],
@@ -405,6 +451,22 @@ namespace webProject2.Controllers
 
 
         }
+
+
+
+        public IActionResult deleteFromCart(int Id) {
+            var builder = WebApplication.CreateBuilder();
+            string conStr = builder.Configuration.GetConnectionString("webProject2Context");
+            SqlConnection conn = new SqlConnection(conStr);
+            string sql = "DELETE FROM cart where Id='" + Id + "'";
+            SqlCommand comm=new SqlCommand(sql, conn);
+            conn.Open();
+            comm.ExecuteNonQuery();
+
+            return RedirectToAction("checkout", "orders");
+        
+        }
+
     } 
 }
 

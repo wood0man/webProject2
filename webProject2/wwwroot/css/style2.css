@@ -1,0 +1,16 @@
+﻿body {
+    background-image: url(https://wallpapers.com/images/hd/books-background-pp9d786949tkqilx.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+
+.text {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: white;
+}
+#blackBackground {
+    bottom: 300px;
+    background-color: rgba(0, 0, 0, 0.325);
+}
