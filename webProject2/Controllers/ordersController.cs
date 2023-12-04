@@ -253,6 +253,7 @@ namespace webProject2.Controllers
         [HttpPost]
 
         public IActionResult buy(int itemid,int quantity) {
+            HttpContext.Session.SetString("quantity", Convert.ToString(quantity));
             var builder = WebApplication.CreateBuilder();
             string conStr = builder.Configuration.GetConnectionString("webProject2Context");
             SqlConnection conn = new SqlConnection(conStr);
@@ -367,6 +368,7 @@ namespace webProject2.Controllers
 
 
         public IActionResult checkout() {
+            int quantity = Convert.ToInt16(HttpContext.Session.GetString("quantity"));
             double amount = 0;
             List<cart>list= new List<cart>();
             var builder = WebApplication.CreateBuilder();
@@ -388,7 +390,7 @@ namespace webProject2.Controllers
 
                 
                  sql = "SELECT * FROM items where Id= '" + reader["itemid"] + "' ";
-                SqlConnection conn2 = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=mono;Integrated Security=True");
+                SqlConnection conn2 = new SqlConnection(conStr);
 
                 SqlCommand comm2 = new SqlCommand(sql, conn2);
                 conn2.Open();
@@ -399,11 +401,11 @@ namespace webProject2.Controllers
                     {
                         double pp = (int)reader2["price"];
                         double discountedprice = pp * 0.1;
-                        amount += (int)reader2["price"] - discountedprice;
+                        amount += quantity*((int)reader2["price"] - discountedprice);
                     }
                     else
                     {
-                        amount += (int)reader2["price"];     
+                        amount += quantity*(int)reader2["price"];     
                     }
                 }
                 reader2.Close();
