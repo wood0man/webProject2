@@ -7,7 +7,7 @@
 
 
 @{
-    if(ViewData["role"]=="admin")
+    if((string)ViewData["role"]=="admin")
     Layout = "~/Views/Shared/adminLayout.cshtml";
     else
         Layout = "~/Views/Shared/customerLayout.cshtml";
@@ -79,7 +79,7 @@
         
 
 
-        @if (ViewData["full"] == null)
+        @if ((string)ViewData["full"] == null)
         
        
 
@@ -113,7 +113,7 @@
                 </td>
 
                     @{
-                        if (ViewData["role"] == "admin")
+                        if ((string)ViewData["role"] == "admin")
 
 
                         {

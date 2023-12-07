@@ -225,7 +225,14 @@ namespace webProject2.Controllers
                 comm = new SqlCommand(sql, conn);
                 comm.ExecuteNonQuery();
                 conn.Close();
-                return View("login");
+                HttpContext.Session.SetString("name", name);
+                HttpContext.Session.SetString("role","customer" );
+                sql = "SELECT MAX(Id) from users";
+                comm= new SqlCommand(sql, conn);
+                conn.Open();
+                HttpContext.Session.SetString("userid",Convert.ToString(comm.ExecuteScalar()));
+                conn.Close();
+                return RedirectToAction("customerPage");
             }
 
 
@@ -246,7 +253,7 @@ namespace webProject2.Controllers
             var builder = WebApplication.CreateBuilder();
             string conStr = builder.Configuration.GetConnectionString("webProject2Context");
             SqlConnection conn = new SqlConnection(conStr);
-            string sql = "select * from orders where userid= (select Id from userid where userid= '" + HttpContext.Session.GetString("userid") + "' ) ";
+            string sql = "select * from orders where userid= '"+HttpContext.Session.GetString("userid")+"' ";
             // Here i useing an inner query to get the Id without using a forign key
             SqlCommand comm = new SqlCommand(sql, conn);
             conn.Open();

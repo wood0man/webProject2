@@ -174,7 +174,7 @@ namespace webProject2.Controllers
 
         public IActionResult search() {
             List<items> item = new List<items>();
-
+            ViewData["role"] = HttpContext.Session.GetString("role");
             ViewData["full"] = "blanching";
             return View(item);
             
@@ -219,71 +219,7 @@ namespace webProject2.Controllers
 
         }
 
-        public IActionResult customersearch()
-        {
-            List<items> item = new List<items>();
-
-            ViewData["full"] = "blanching";
-            return View(item);
-
-        }
-        [HttpPost]
-        public IActionResult customersearch(string title)
-        {
-            List<items> list = new List<items>();
-            var builder = WebApplication.CreateBuilder();
-            string conStr = builder.Configuration.GetConnectionString("webProject2Context");
-            SqlConnection conn = new SqlConnection(conStr);
-            string sql = "SELECT * FROM items where name like '%" + title + "%'";
-            SqlCommand comm = new SqlCommand(sql, conn);
-            conn.Open();
-            SqlDataReader reader = comm.ExecuteReader();
-            items items = new items();
-            while (reader.Read())
-            {
-
-                list.Add(new items
-                {
-
-                    name = (string)reader["name"],
-                    description = (string)reader["description"],
-                    price = (int)reader["price"],
-                    category = (string)reader["category"],
-                    discount = (string)reader["discount"],
-                    quantity = (int)reader["quantity"],
-                    image = (string)reader["image"]
-
-
-
-
-                });
-
-            }
-            conn.Close();
-            reader.Close();
-            ViewData["full"] = null;
-            return View(list);
-
-
-
-        }
-
-        public async Task<IActionResult> customerdetails(int? id)
-        {
-            if (id == null || _context.items == null)
-            {
-                return NotFound();
-            }
-
-            var items = await _context.items
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (items == null)
-            {
-                return NotFound();
-            }
-
-            return View(items);
-        }
+        
 
     }
 }
