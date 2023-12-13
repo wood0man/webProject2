@@ -76,10 +76,7 @@ namespace webProject2.Controllers
         }
        
 
-        public IActionResult Details()
-        {
-            return View();
-        }
+      
         public IActionResult login() {
             if (!HttpContext.Request.Cookies.ContainsKey("name"))
             {
