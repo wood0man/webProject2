@@ -1,4 +1,4 @@
-﻿using Humanizer;
+﻿ using Humanizer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using System.Diagnostics;
@@ -202,11 +202,11 @@ namespace webProject2.Controllers
             SqlDataReader reader = comm.ExecuteReader();
             if (reader.Read())
             {
-                ViewData["userDoesExists"] = "Windows.alert(\"The user does already exists. choose another name\")";
+                ViewData["userDoesExists"] = "The user does already exists. choose another name";
                 return View();
             }
             else if (password != password2) {
-                ViewData["wrongPassword"] = "(the passwords don't match)";
+                ViewData["wrongPassword"] = "The passwords don't match";
             }
             
             else if (agree == false)
@@ -234,13 +234,6 @@ namespace webProject2.Controllers
                 conn.Close();
                 return RedirectToAction("customerPage");
             }
-
-
-
-
-
-
-
 
             conn.Close();
             return View();
