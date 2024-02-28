@@ -1,7 +1,7 @@
 # webProject2
 
 
-this is a bookstore program.
+this is a bookstore program done in ASP.net.
 you can either be an admin or a customer
 
 here are the tables you need to use the project
